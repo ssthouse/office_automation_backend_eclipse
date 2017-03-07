@@ -1,4 +1,4 @@
-package com.ssthouse.officeautomation.utils;
+package com.ssthouse.officeautomation.util;
 
 /**
  * Created by ssthouse on 01/02/2017.

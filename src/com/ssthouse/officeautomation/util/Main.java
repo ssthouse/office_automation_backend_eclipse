@@ -1,4 +1,4 @@
-package com.ssthouse.officeautomation.utils;
+package com.ssthouse.officeautomation.util;
 
 
 import com.google.gson.Gson;

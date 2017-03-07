@@ -1,4 +1,4 @@
-package com.ssthouse.officeautomation.utils;
+package com.ssthouse.officeautomation.util;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

@@ -66,5 +66,6 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/spring-websocket-4.3.6.RELEASE.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/struts2-core-2.3.31.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/xwork-core-2.3.31.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
