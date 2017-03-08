@@ -14,7 +14,7 @@
         <!--<property name="prefix" value="/WEB-INF/classes/resources/templates/"/>-->
         <!--<property name="suffix" value=".html"/>-->
     </bean>
-
+    
     <mvc:annotation-driven/>
 
     <mvc:resources location="/" mapping="/resources/**"/>
