@@ -12,7 +12,7 @@
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.connection.password">ssthouse</property>
         <!--bean 的映射-->
-        <mapping class="com.ssthouse.officeautomation.entity.UserInfoEntity"/>
+        <mapping class="com.ssthouse.officeautomation.entity.UserEntity"/> 
         <!-- DB schema will be updated if needed -->
         <!-- <property name="hbm2ddl.auto">update</property> -->
     </session-factory>

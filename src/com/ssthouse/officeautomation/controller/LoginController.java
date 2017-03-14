@@ -20,11 +20,15 @@ import com.sun.org.apache.bcel.internal.generic.NEW;
 public class LoginController {
 
 	@CrossOrigin
-	@RequestMapping(value = "/admin")
+	@RequestMapping("/admin")
 	@ResponseBody
 	public SimpleResultBean loginAsAdmin(@RequestBody UserBean requestBody) {
-		Log.error(requestBody.getPassword());
-		Log.error(requestBody.getUsername());
-		return new SimpleResultBean(true);
+		boolean loginReault = false;
+		if (requestBody.getUsername().equals("ssthouse") && requestBody.getPassword().equals("ssthouse")) {
+			loginReault = true;
+		} else {
+			loginReault = false;
+		}
+		return new SimpleResultBean(loginReault);
 	}
 }

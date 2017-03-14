@@ -3,20 +3,20 @@ package com.ssthouse.officeautomation.entity;
 import javax.persistence.*;
 
 /**
- * Created by ssthouse on 02/02/2017.
+ * Created by ssthouse on 14/03/2017.
  */
 @Entity
-@Table(name = "user_info", schema = "office_automation", catalog = "")
-public class UserInfoEntity {
+@Table(name = "user", schema = "office_automation", catalog = "")
+public class UserEntity {
     private int id;
-    private String loginName;
-    private String password;
     private String username;
-    private String gender;
+    private String password;
+    private String name;
+    private Byte gender;
     private String phoneNumber;
     private String description;
     private String department;
-    private byte admin;
+    private byte isAdmin;
 
     @Id
     @Column(name = "id", nullable = false)
@@ -29,27 +29,7 @@ public class UserInfoEntity {
     }
 
     @Basic
-    @Column(name = "login_name", nullable = false, length = 255)
-    public String getLoginName() {
-        return loginName;
-    }
-
-    public void setLoginName(String loginName) {
-        this.loginName = loginName;
-    }
-
-    @Basic
-    @Column(name = "password", nullable = false, length = 255)
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    @Basic
-    @Column(name = "username", nullable = true, length = 255)
+    @Column(name = "username", nullable = false, length = 50)
     public String getUsername() {
         return username;
     }
@@ -59,17 +39,37 @@ public class UserInfoEntity {
     }
 
     @Basic
-    @Column(name = "gender", nullable = true, length = 255)
-    public String getGender() {
+    @Column(name = "password", nullable = false, length = 50)
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    @Basic
+    @Column(name = "name", nullable = true, length = 255)
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Basic
+    @Column(name = "gender", nullable = true)
+    public Byte getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(Byte gender) {
         this.gender = gender;
     }
 
     @Basic
-    @Column(name = "phone_number", nullable = true, length = 255)
+    @Column(name = "phone_number", nullable = true, length = 20)
     public String getPhoneNumber() {
         return phoneNumber;
     }
@@ -98,17 +98,28 @@ public class UserInfoEntity {
         this.department = department;
     }
 
+    @Basic
+    @Column(name = "is_admin", nullable = false)
+    public byte getIsAdmin() {
+        return isAdmin;
+    }
+
+    public void setIsAdmin(byte isAdmin) {
+        this.isAdmin = isAdmin;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        UserInfoEntity that = (UserInfoEntity) o;
+        UserEntity that = (UserEntity) o;
 
         if (id != that.id) return false;
-        if (loginName != null ? !loginName.equals(that.loginName) : that.loginName != null) return false;
-        if (password != null ? !password.equals(that.password) : that.password != null) return false;
+        if (isAdmin != that.isAdmin) return false;
         if (username != null ? !username.equals(that.username) : that.username != null) return false;
+        if (password != null ? !password.equals(that.password) : that.password != null) return false;
+        if (name != null ? !name.equals(that.name) : that.name != null) return false;
         if (gender != null ? !gender.equals(that.gender) : that.gender != null) return false;
         if (phoneNumber != null ? !phoneNumber.equals(that.phoneNumber) : that.phoneNumber != null) return false;
         if (description != null ? !description.equals(that.description) : that.description != null) return false;
@@ -120,23 +131,14 @@ public class UserInfoEntity {
     @Override
     public int hashCode() {
         int result = id;
-        result = 31 * result + (loginName != null ? loginName.hashCode() : 0);
-        result = 31 * result + (password != null ? password.hashCode() : 0);
         result = 31 * result + (username != null ? username.hashCode() : 0);
+        result = 31 * result + (password != null ? password.hashCode() : 0);
+        result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (gender != null ? gender.hashCode() : 0);
         result = 31 * result + (phoneNumber != null ? phoneNumber.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (department != null ? department.hashCode() : 0);
+        result = 31 * result + (int) isAdmin;
         return result;
-    }
-
-    @Basic
-    @Column(name = "admin", nullable = false)
-    public byte getAdmin() {
-        return admin;
-    }
-
-    public void setAdmin(byte admin) {
-        this.admin = admin;
     }
 }
