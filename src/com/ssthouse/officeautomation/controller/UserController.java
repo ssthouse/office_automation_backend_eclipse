@@ -1,6 +1,9 @@
 package com.ssthouse.officeautomation.controller;
 
 import com.google.gson.Gson;
+import com.ssthouse.officeautomation.dao.UserDaoImpl;
+
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +22,9 @@ public class UserController {
     @RequestMapping("/{username}")
     @ResponseBody
     public String getUserInfo(@PathVariable String username) {
+    	ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
+		UserDaoImpl personDAO = context.getBean(UserDaoImpl.class);
+		personDAO.test();
         return new Gson().toJson(new UserInfo(username, "22"));
     }
 

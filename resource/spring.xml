@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 定义数据源 -->
+	<!-- <bean id="dataSource"
+		class="org.apache.commons.dbcp.BasicDataSource" 
+		destroy-method="close">
+		驱动
+		<property name="driverClass">
+			<value>com.mysql.jdbc.Driver</value>
+		</property>
+		url
+		<property name="url">
+			<value>jdbc:mysql://localhost:3306/office_automation</value>
+		</property>
+		<property name="name">
+			<value>root</value>
+		</property>
+		<property name="password">
+			<value>ssthouse</value>	
+		</property>
+	</bean> -->
+
+	<!-- 定义 SessionFactory -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+		
+		<!-- 指定 dataSource -->
+		<!-- <property name="dataSource" ref="dataSource"></property> -->
+		
+		<!-- 指定hibernate的配置文件位置 -->
+		<property name="configLocation" value="classpath:hibernate.cfg.xml"></property>
+		<!-- 指定映射文件 -->
+		<property name="annotatedClasses">
+			<list>
+				<value>com.ssthouse.officeautomation.entity.UserEntity</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.current_session_context_class">thread</prop>
+				<prop key="hibernate.show_sql">true</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<!-- DAO bean -->
+	<!-- 测试 UserDao -->
+	<bean id="userDao" class="com.ssthouse.officeautomation.dao.UserDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+<!-- 	<bean id="transactionManager"
+    	class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+    	<property name="sessionFactory" ref="sessionFactory" />
+	</bean> -->
+	
+</beans>
