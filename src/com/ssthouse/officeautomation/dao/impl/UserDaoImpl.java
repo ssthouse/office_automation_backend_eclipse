@@ -1,8 +1,13 @@
 package com.ssthouse.officeautomation.dao.impl;
 
+
+import javax.annotation.Resource;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import com.ssthouse.officeautomation.base.BaseDao;
 import com.ssthouse.officeautomation.dao.IUserDao;

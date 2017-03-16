@@ -8,7 +8,7 @@
    http://www.springframework.org/schema/context/spring-context-3.0.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
     <!--需要扫描 Controller 包名-->
-    <context:component-scan base-package="com.ssthouse.officeautomation.controller"/>
+    <context:component-scan base-package="com.ssthouse.officeautomation"/>
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <!--<property name="prefix" value="/WEB-INF/classes/resources/templates/"/>-->
