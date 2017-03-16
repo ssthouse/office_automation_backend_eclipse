@@ -1,4 +1,4 @@
-package com.ssthouse.officeautomation.entity;
+package com.ssthouse.officeautomation.domain;
 
 import javax.persistence.*;
 
@@ -8,6 +8,10 @@ import javax.persistence.*;
 @Entity
 @Table(name = "user", schema = "office_automation", catalog = "")
 public class UserEntity {
+	public static final String COLUMN_USERNAME = "username";
+	public static final String COLUMN_PASSWORD = "password";
+	public static final String COLUMN_IS_ADMIN = "isAdmin";
+	
     private int id;
     private String username;
     private String password;
@@ -16,7 +20,7 @@ public class UserEntity {
     private String phoneNumber;
     private String description;
     private String department;
-    private byte isAdmin;
+    private boolean isAdmin;
 
     @Id
     @Column(name = "id", nullable = false)
@@ -99,12 +103,12 @@ public class UserEntity {
     }
 
     @Basic
-    @Column(name = "is_admin", nullable = false)
-    public byte getIsAdmin() {
+    @Column(name = "is_admin", nullable = false, columnDefinition = "TINYINT(1)")
+    public boolean getIsAdmin() {
         return isAdmin;
     }
 
-    public void setIsAdmin(byte isAdmin) {
+    public void setIsAdmin(boolean isAdmin) {
         this.isAdmin = isAdmin;
     }
 
@@ -138,7 +142,6 @@ public class UserEntity {
         result = 31 * result + (phoneNumber != null ? phoneNumber.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (department != null ? department.hashCode() : 0);
-        result = 31 * result + (int) isAdmin;
         return result;
     }
 }

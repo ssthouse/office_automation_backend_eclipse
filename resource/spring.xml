@@ -3,6 +3,7 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+	<!-- depresed, 直接在 SessionFactory 中定义 -->
 	<!-- 定义数据源 -->
 	<!-- <bean id="dataSource"
 		class="org.apache.commons.dbcp.BasicDataSource" 
@@ -35,7 +36,7 @@
 		<!-- 指定映射文件 -->
 		<property name="annotatedClasses">
 			<list>
-				<value>com.ssthouse.officeautomation.entity.UserEntity</value>
+				<value>com.ssthouse.officeautomation.domain.UserEntity</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
@@ -49,11 +50,12 @@
 	
 	<!-- DAO bean -->
 	<!-- 测试 UserDao -->
-	<bean id="userDao" class="com.ssthouse.officeautomation.dao.UserDaoImpl">
+	<bean id="userDao" class="com.ssthouse.officeautomation.dao.impl.UserDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
 	
-<!-- 	<bean id="transactionManager"
+	<!-- 暂时不知道是做什么用的... -->
+	<!-- <bean id="transactionManager"
     	class="org.springframework.orm.hibernate5.HibernateTransactionManager">
     	<property name="sessionFactory" ref="sessionFactory" />
 	</bean> -->

@@ -2,7 +2,8 @@ package com.ssthouse.officeautomation.util;
 
 
 import com.google.gson.Gson;
-import com.ssthouse.officeautomation.entity.UserEntity;
+import com.ssthouse.officeautomation.domain.UserEntity;
+
 import org.hibernate.Session;
 
 /**

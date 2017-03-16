@@ -1,7 +1,7 @@
 package com.ssthouse.officeautomation.controller;
 
 import com.google.gson.Gson;
-import com.ssthouse.officeautomation.dao.UserDaoImpl;
+import com.ssthouse.officeautomation.dao.impl.UserDaoImpl;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;

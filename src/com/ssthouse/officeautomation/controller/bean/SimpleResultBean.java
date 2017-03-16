@@ -2,18 +2,19 @@ package com.ssthouse.officeautomation.controller.bean;
 
 public class SimpleResultBean {
 
-	private boolean result;
+	private boolean success;
 
 	public SimpleResultBean(boolean result) {
 		super();
-		this.result = result;
+		this.success = result;
 	}
 
-	public boolean isResult() {
-		return result;
+	public boolean isSuccess() {
+		return success;
 	}
 
-	public void setResult(boolean result) {
-		this.result = result;
+	public void setSuccess(boolean isSuccess) {
+		this.success = isSuccess;
 	}
+
 }
