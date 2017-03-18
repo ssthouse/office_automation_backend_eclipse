@@ -100,9 +100,14 @@ public class TokenManager {
 		}
 	}
 
+	/**
+	 * 从token中解析出 username 信息
+	 * @param token
+	 * @return
+	 */
 	public static String getTokenUsername(String token){
 		try{
-			// 1.判断时候符合 secret 签名
+			// 1.判断是否符合 secret 签名
 			Jws<Claims> jws = Jwts.parser().setSigningKey(TokenCons.TOKEN_SECRET).parseClaimsJws(token);
 			// body 中
 			if(!jws.getBody().containsKey(KEY_CLAIM_USERNAME)){

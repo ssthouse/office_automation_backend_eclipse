@@ -25,10 +25,14 @@
 	</bean>
 	
 	<!-- DAO bean -->
-	<!-- 测试 UserDao -->
 	<bean id="userDao" class="com.ssthouse.officeautomation.dao.impl.UserDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean> 
+	
+	<!-- Service Bean -->
+	<bean id="userInfoService" class="com.ssthouse.officeautomation.service.impl.UserInfoServiceImpl">
+		<property name="userDao" ref="userDao"></property>
+	</bean>
 	
 	<!-- 暂时不知道是做什么用的... -->
 	<!-- <bean id="transactionManager"

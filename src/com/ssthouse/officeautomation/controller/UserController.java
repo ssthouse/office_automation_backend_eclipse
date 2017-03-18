@@ -1,10 +1,12 @@
 package com.ssthouse.officeautomation.controller;
 
 import com.google.gson.Gson;
+import com.ssthouse.officeautomation.controller.bean.SimpleResultBean;
 import com.ssthouse.officeautomation.controller.bean.UserBean;
 import com.ssthouse.officeautomation.controller.bean.UserResultBean;
 import com.ssthouse.officeautomation.dao.impl.UserDaoImpl;
 import com.ssthouse.officeautomation.domain.UserEntity;
+import com.ssthouse.officeautomation.service.IUserInfoService;
 import com.ssthouse.officeautomation.token.TokenManager;
 import com.ssthouse.officeautomation.util.Log;
 import com.ssthouse.officeautomation.util.StringUtil;
@@ -16,7 +18,9 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
@@ -34,7 +38,7 @@ public class UserController {
 	 * @return
 	 */
 	@CrossOrigin
-	@RequestMapping(value = "/info", produces = { "application/json;charset=UTF-8" })
+	@RequestMapping(value = "/info", produces = { "application/json;charset=UTF-8" }, method=RequestMethod.GET)
 	@ResponseBody
 	public String getUserInfo(HttpServletRequest request) {
 		Log.error("user/info  ****************************");
@@ -42,11 +46,10 @@ public class UserController {
 			return new Gson().toJson(new UserResultBean(false, "token 过期", null));
 		}
 		String token = request.getHeader("token");
-		String username = TokenManager.getTokenUsername(token);
 		// 根据token获取UserEntity
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
-		UserDaoImpl personDAO = context.getBean(UserDaoImpl.class);
-		UserEntity userEntity = personDAO.getUserEntity(username);
+		IUserInfoService userInfoService = context.getBean(IUserInfoService.class);
+		UserEntity userEntity = userInfoService.getUserInfo(token);
 		if (!isUserEntityValid(userEntity)) {
 			return new Gson().toJson(new UserResultBean(false, "未找到用户", null));
 		}
@@ -67,6 +70,17 @@ public class UserController {
 		return true;
 	}
 
+	@CrossOrigin
+	@RequestMapping(value="/info", method=RequestMethod.POST)
+	@ResponseBody
+	public String modifyUserInfo(@RequestBody UserEntity userEntity, HttpServletRequest request){
+		if(!TokenManager.verifyToken(request)){
+			return new Gson().toJson(new SimpleResultBean(false));
+		}
+		//TODO 根据username找到UserEntity
+		return null;
+	}
+	
 	@CrossOrigin
 	@RequestMapping("/{username}/blog/{blogId}")
 	@ResponseBody

@@ -22,14 +22,6 @@ public class UserDaoImpl extends BaseDao implements IUserDao{
         this.sessionFactory = sessionFactory;
     }
     
-    public void test() {
-		Session session = this.sessionFactory.openSession();
-		session.beginTransaction();
-        UserEntity userEntity = session.get(UserEntity.class, 1);
-        Log.error(userEntity.getUsername() + "  " + userEntity.getDescription()+"********"+userEntity.getIsAdmin());
-    
-	}
-
     /**
      * 返回的数据可能为 null
      */
