@@ -8,6 +8,7 @@ import com.ssthouse.officeautomation.dao.impl.UserDaoImpl;
 import com.ssthouse.officeautomation.domain.UserEntity;
 import com.ssthouse.officeautomation.service.IUserInfoService;
 import com.ssthouse.officeautomation.token.TokenManager;
+import com.ssthouse.officeautomation.util.BeanValidator;
 import com.ssthouse.officeautomation.util.Log;
 import com.ssthouse.officeautomation.util.StringUtil;
 import com.sun.org.apache.bcel.internal.generic.NEW;
@@ -32,55 +33,43 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class UserController {
 
 	/**
-	 * 获取用户信息 GET 直接从token中获取username进行数据库query
+	 * 获取用户信息 GET
 	 * 
 	 * @param username
 	 * @return
 	 */
 	@CrossOrigin
-	@RequestMapping(value = "/info", produces = { "application/json;charset=UTF-8" }, method=RequestMethod.GET)
+	@RequestMapping(value = "/info", produces = { "application/json;charset=UTF-8" }, method = RequestMethod.GET)
 	@ResponseBody
 	public String getUserInfo(HttpServletRequest request) {
 		Log.error("user/info  ****************************");
 		if (!TokenManager.verifyToken(request)) {
 			return new Gson().toJson(new UserResultBean(false, "token 过期", null));
 		}
-		String token = request.getHeader("token");
 		// 根据token获取UserEntity
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
 		IUserInfoService userInfoService = context.getBean(IUserInfoService.class);
-		UserEntity userEntity = userInfoService.getUserInfo(token);
-		if (!isUserEntityValid(userEntity)) {
+		UserEntity userEntity = userInfoService.getUserInfo(request.getHeader("token"));
+		if (!BeanValidator.isValidate(userEntity)) {
 			return new Gson().toJson(new UserResultBean(false, "未找到用户", null));
 		}
-		Log.error(new Gson().toJson(userEntity));
 		return new Gson().toJson(new UserResultBean(true, userEntity));
 	}
 
-	private boolean isUserEntityValid(UserEntity userEntity) {
-		if (userEntity == null) {
-			return false;
-		}
-		if (StringUtil.isEmpty(userEntity.getUsername())) {
-			return false;
-		}
-		if (StringUtil.isEmpty(userEntity.getPassword())) {
-			return false;
-		}
-		return true;
-	}
-
 	@CrossOrigin
-	@RequestMapping(value="/info", method=RequestMethod.POST)
+	@RequestMapping(value = "/info",  produces = { "application/json;charset=UTF-8" },method = RequestMethod.POST)
 	@ResponseBody
-	public String modifyUserInfo(@RequestBody UserEntity userEntity, HttpServletRequest request){
-		if(!TokenManager.verifyToken(request)){
+	public String modifyUserInfo(@RequestBody UserEntity userEntity, HttpServletRequest request) {
+		if (!TokenManager.verifyToken(request)) {
 			return new Gson().toJson(new SimpleResultBean(false));
 		}
-		//TODO 根据username找到UserEntity
-		return null;
+		// TODO 根据username找到UserEntity
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
+		IUserInfoService userInfoService = context.getBean(IUserInfoService.class);
+		boolean result = userInfoService.updateUserInfo(userEntity, request.getHeader("token"));
+		return new Gson().toJson(new SimpleResultBean(result));
 	}
-	
+
 	@CrossOrigin
 	@RequestMapping("/{username}/blog/{blogId}")
 	@ResponseBody

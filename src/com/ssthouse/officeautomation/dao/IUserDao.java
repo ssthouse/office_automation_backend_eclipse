@@ -21,4 +21,10 @@ public interface IUserDao {
 	 * @return
 	 */
 	UserEntity getUserEntity(String username);
+	
+	/**
+	 * 更新UserEntity
+	 * @param userEntity
+	 */
+	void updateUserEntity(UserEntity userEntity);
 }

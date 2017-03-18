@@ -13,7 +13,7 @@ public interface IUserInfoService {
 	 * 更新用户信息
 	 * @param userEntity
 	 */
-	void updateUserInfo(UserEntity userEntity);
+	boolean updateUserInfo(UserEntity userEntity, String token);
 	
 	/**
 	 * 获取用户信息

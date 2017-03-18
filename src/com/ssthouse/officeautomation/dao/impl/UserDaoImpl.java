@@ -5,6 +5,7 @@ import javax.annotation.Resource;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
@@ -46,6 +47,17 @@ public class UserDaoImpl extends BaseDao implements IUserDao{
 				.add(Restrictions.eq(UserEntity.COLUMN_USERNAME, username))
 				.uniqueResult();
 		return userEntity;
+	}
+
+	@Override
+	public void updateUserEntity(UserEntity userEntity) {
+		//TODO 后续换成使用HibernateTempale进行session操作
+		Session session = this.sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		//session.update(userEntity);
+		session.saveOrUpdate(userEntity);
+		Log.error("have update user entity***************************"+userEntity.getId()+userEntity.getName());
+		transaction.commit();
 	}
 	
 
