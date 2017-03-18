@@ -8,11 +8,11 @@ public class Log {
     private static boolean isDebug = true;
 
     public static void error(Object msgRoot, String msg) {
-        System.err.println(msgRoot.getClass().getName() + ": " + msg);
+        System.out.println(msgRoot.getClass().getName() + ": " + msg);
     }
 
     public static void error(String msg) {
-        System.err.println(msg);
+        System.out.println(msg);
     }
 
     public static void debug(Object msgRoot, String msg) {

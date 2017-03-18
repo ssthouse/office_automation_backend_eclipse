@@ -1,5 +1,7 @@
 package com.ssthouse.officeautomation.controller.bean;
 
+import com.ssthouse.officeautomation.domain.UserEntity;
+
 public class UserBean {
 	
 	private String username;
@@ -42,4 +44,5 @@ public class UserBean {
 	public void setIsAdmin(boolean isAdmin) {
 		this.isAdmin = isAdmin;
 	}
+
 }

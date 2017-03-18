@@ -13,4 +13,12 @@ public interface IUserDao {
 	 * @return
 	 */
 	UserEntity getUserEntity(String username, String password, boolean isAdmin);
+	
+	/**
+	 * 直接通过username获取用户信息
+	 * 用于已经登录(请求带有token)的情况
+	 * @param username
+	 * @return
+	 */
+	UserEntity getUserEntity(String username);
 }

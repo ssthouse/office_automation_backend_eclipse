@@ -35,7 +35,6 @@ public class UserDaoImpl extends BaseDao implements IUserDao{
      */
 	@Override
 	public UserEntity getUserEntity(String username, String password, boolean isAdmin) {
-		Log.error("isAdmin:  "+ isAdmin);
 		Session session = this.sessionFactory.openSession();
 		session.beginTransaction();
 		//byte isTure = 0;
@@ -46,6 +45,16 @@ public class UserDaoImpl extends BaseDao implements IUserDao{
 			.uniqueResult();
 		return userEntity;
 	}
+
+	@Override
+	public UserEntity getUserEntity(String username) {
+		Session session = this.sessionFactory.openSession();
+		session.beginTransaction();
+		UserEntity userEntity = (UserEntity) session.createCriteria(UserEntity.class)
+				.add(Restrictions.eq(UserEntity.COLUMN_USERNAME, username))
+				.uniqueResult();
+		return userEntity;
+	}
 	
-	
+
 }

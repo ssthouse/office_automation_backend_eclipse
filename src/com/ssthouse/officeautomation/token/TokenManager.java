@@ -15,6 +15,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.SignatureException;
 import sun.launcher.resources.launcher;
+import sun.tools.jar.resources.jar_es;
 
 public class TokenManager {
 
@@ -57,16 +58,16 @@ public class TokenManager {
 
 	/**
 	 * 获取 token
-	 * @param username 将 username 添加到  claim 中
+	 * 
+	 * @param username
+	 *            将 username 添加到 claim 中
 	 * @return
 	 */
 	public static String getToken(String username) {
 		long curTimeInMillis = System.currentTimeMillis();
 		String token = Jwts.builder().claim(KEY_CLAIM_IAT, curTimeInMillis)
-				.claim(KEY_CLAIM_EXP, curTimeInMillis + 24 * 60 * 60 * 1000)
-				.claim(KEY_CLAIM_USERNAME, username)
-				.signWith(SignatureAlgorithm.HS256, TokenCons.TOKEN_SECRET)
-				.compact();
+				.claim(KEY_CLAIM_EXP, curTimeInMillis + 24 * 60 * 60 * 1000).claim(KEY_CLAIM_USERNAME, username)
+				.signWith(SignatureAlgorithm.HS256, TokenCons.TOKEN_SECRET).compact();
 		return token;
 	}
 
@@ -77,24 +78,39 @@ public class TokenManager {
 	 * @return
 	 */
 	public static boolean verifyToken(HttpServletRequest request) {
-		if(request == null || StringUtil.isEmpty(request.getHeader("token"))){
+		if (request == null || StringUtil.isEmpty(request.getHeader("token"))) {
 			return false;
 		}
 		try {
 			// 1.判断时候符合 secret 签名
-			Jws<Claims> jws = Jwts.parser().setSigningKey(TokenCons.TOKEN_SECRET).parseClaimsJws(request.getHeader("token"));
+			Jws<Claims> jws = Jwts.parser().setSigningKey(TokenCons.TOKEN_SECRET)
+					.parseClaimsJws(request.getHeader("token"));
 			// body 中
-			if(!jws.getBody().containsKey(KEY_CLAIM_EXP)){
+			if (!jws.getBody().containsKey(KEY_CLAIM_EXP)) {
 				return false;
 			}
 			long curTimeInMillis = System.currentTimeMillis();
 			long tokenExpTime = (long) jws.getBody().get(KEY_CLAIM_EXP);
-			if(tokenExpTime < curTimeInMillis){
+			if (tokenExpTime < curTimeInMillis) {
 				return false;
 			}
 			return true;
 		} catch (SignatureException e) {
 			return false;
+		}
+	}
+
+	public static String getTokenUsername(String token){
+		try{
+			// 1.判断时候符合 secret 签名
+			Jws<Claims> jws = Jwts.parser().setSigningKey(TokenCons.TOKEN_SECRET).parseClaimsJws(token);
+			// body 中
+			if(!jws.getBody().containsKey(KEY_CLAIM_USERNAME)){
+				return "";
+			}
+			return (String) jws.getBody().get(KEY_CLAIM_USERNAME);
+		}catch(SignatureException e){
+			return "";
 		}
 	}
 }

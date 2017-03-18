@@ -1,7 +1,16 @@
 package com.ssthouse.officeautomation.controller;
 
 import com.google.gson.Gson;
+import com.ssthouse.officeautomation.controller.bean.UserBean;
+import com.ssthouse.officeautomation.controller.bean.UserResultBean;
 import com.ssthouse.officeautomation.dao.impl.UserDaoImpl;
+import com.ssthouse.officeautomation.domain.UserEntity;
+import com.ssthouse.officeautomation.token.TokenManager;
+import com.ssthouse.officeautomation.util.Log;
+import com.ssthouse.officeautomation.util.StringUtil;
+import com.sun.org.apache.bcel.internal.generic.NEW;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
@@ -18,27 +27,57 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/user")
 public class UserController {
 
-    @CrossOrigin
-    @RequestMapping("/{username}")
-    @ResponseBody
-    public String getUserInfo(@PathVariable String username) {
-    	ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
+	/**
+	 * 获取用户信息 GET 直接从token中获取username进行数据库query
+	 * 
+	 * @param username
+	 * @return
+	 */
+	@CrossOrigin
+	@RequestMapping(value = "/info", produces = { "application/json;charset=UTF-8" })
+	@ResponseBody
+	public String getUserInfo(HttpServletRequest request) {
+		Log.error("user/info  ****************************");
+		if (!TokenManager.verifyToken(request)) {
+			return new Gson().toJson(new UserResultBean(false, "token 过期", null));
+		}
+		String token = request.getHeader("token");
+		String username = TokenManager.getTokenUsername(token);
+		// 根据token获取UserEntity
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
 		UserDaoImpl personDAO = context.getBean(UserDaoImpl.class);
-		personDAO.test();
-        return new Gson().toJson(new UserInfo(username, "22"));
-    }
+		UserEntity userEntity = personDAO.getUserEntity(username);
+		if (!isUserEntityValid(userEntity)) {
+			return new Gson().toJson(new UserResultBean(false, "未找到用户", null));
+		}
+		Log.error(new Gson().toJson(userEntity));
+		return new Gson().toJson(new UserResultBean(true, userEntity));
+	}
 
-    @CrossOrigin
-    @RequestMapping("/{username}/blog/{blogId}")
-    @ResponseBody
-    public String getUserBlogInfo(@PathVariable String username, @PathVariable int blogId) {
-        return String.format("username: %s; blogId: %d", username, blogId);
-    }
+	private boolean isUserEntityValid(UserEntity userEntity) {
+		if (userEntity == null) {
+			return false;
+		}
+		if (StringUtil.isEmpty(userEntity.getUsername())) {
+			return false;
+		}
+		if (StringUtil.isEmpty(userEntity.getPassword())) {
+			return false;
+		}
+		return true;
+	}
 
-    @CrossOrigin
-    @RequestMapping("/index")
-    public String getIndex() {
-        return "test";
-    }
+	@CrossOrigin
+	@RequestMapping("/{username}/blog/{blogId}")
+	@ResponseBody
+	public String getUserBlogInfo(@PathVariable String username, @PathVariable int blogId) {
+		return String.format("username: %s; blogId: %d", username, blogId);
+	}
+
+	@CrossOrigin
+	@RequestMapping("/index")
+	public String getIndex() {
+		return "test";
+	}
 
 }
