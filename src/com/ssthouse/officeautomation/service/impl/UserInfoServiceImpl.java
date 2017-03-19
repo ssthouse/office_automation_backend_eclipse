@@ -1,5 +1,7 @@
 package com.ssthouse.officeautomation.service.impl;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import com.ssthouse.officeautomation.dao.IUserDao;
 import com.ssthouse.officeautomation.domain.UserEntity;
 import com.ssthouse.officeautomation.service.IUserInfoService;
@@ -19,7 +21,7 @@ public class UserInfoServiceImpl implements IUserInfoService {
 	public IUserDao getUserDao() {
 		return userDao;
 	}
-
+	
 	@Override
 	public boolean updateUserInfo(UserEntity userEntity, String token) {
 		UserEntity databaseUserEntity = getUserInfo(token);

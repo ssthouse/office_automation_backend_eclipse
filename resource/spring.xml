@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
 	<!-- 定义 SessionFactory -->
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
-		
+
 		<!-- 指定hibernate的配置文件位置 -->
 		<property name="configLocation" value="classpath:hibernate.cfg.xml"></property>
 		<!-- 指定映射文件 -->
@@ -23,21 +26,24 @@
 			</props>
 		</property>
 	</bean>
-	
+
 	<!-- DAO bean -->
 	<bean id="userDao" class="com.ssthouse.officeautomation.dao.impl.UserDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory"></property>
-	</bean> 
-	
+	</bean>
+
 	<!-- Service Bean -->
-	<bean id="userInfoService" class="com.ssthouse.officeautomation.service.impl.UserInfoServiceImpl">
+	<bean id="userInfoService"
+		class="com.ssthouse.officeautomation.service.impl.UserInfoServiceImpl">
 		<property name="userDao" ref="userDao"></property>
 	</bean>
-	
+
 	<!-- 暂时不知道是做什么用的... -->
-	<!-- <bean id="transactionManager"
-    	class="org.springframework.orm.hibernate5.HibernateTransactionManager">
-    	<property name="sessionFactory" ref="sessionFactory" />
+	<!-- <bean id="txManager"
+		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
 	</bean> -->
-	
+
+	<!-- 使spring的一些annotation, 如@Transactional发挥作用 -->
+	<!-- <tx:annotation-driven transaction-manager="txManager" /> -->
 </beans>

@@ -9,6 +9,7 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ssthouse.officeautomation.base.BaseDao;
 import com.ssthouse.officeautomation.dao.IUserDao;
@@ -26,6 +27,7 @@ public class UserDaoImpl extends BaseDao implements IUserDao{
     /**
      * 返回的数据可能为 null
      */
+    @Transactional
 	@Override
 	public UserEntity getUserEntity(String username, String password, boolean isAdmin) {
 		Session session = this.sessionFactory.openSession();
