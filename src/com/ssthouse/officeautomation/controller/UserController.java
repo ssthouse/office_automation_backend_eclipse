@@ -43,9 +43,9 @@ public class UserController {
 	@ResponseBody
 	public String getUserInfo(HttpServletRequest request) {
 		Log.error("user/info  ****************************");
-		if (!TokenManager.verifyToken(request)) {
-			return new Gson().toJson(new UserResultBean(false, "token 过期", null));
-		}
+//		if (!TokenManager.verifyToken(request)) {
+//			return new Gson().toJson(new UserResultBean(false, "token 过期", null));
+//		}
 		// 根据token获取UserEntity
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
 		IUserInfoService userInfoService = context.getBean(IUserInfoService.class);
@@ -60,9 +60,9 @@ public class UserController {
 	@RequestMapping(value = "/info",  produces = { "application/json;charset=UTF-8" },method = RequestMethod.POST)
 	@ResponseBody
 	public String modifyUserInfo(@RequestBody UserEntity userEntity, HttpServletRequest request) {
-		if (!TokenManager.verifyToken(request)) {
-			return new Gson().toJson(new SimpleResultBean(false));
-		}
+//		if (!TokenManager.verifyToken(request)) {
+//			return new Gson().toJson(new SimpleResultBean(false, "token无效"));
+//		}
 		// TODO 根据username找到UserEntity
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
 		IUserInfoService userInfoService = context.getBean(IUserInfoService.class);

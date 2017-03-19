@@ -3,10 +3,18 @@ package com.ssthouse.officeautomation.controller.bean;
 public class SimpleResultBean {
 
 	private boolean ok;
+	
+	private String msg;
 
-	public SimpleResultBean(boolean result) {
+	public SimpleResultBean(boolean ok, String msg) {
 		super();
-		this.ok = result;
+		this.ok = ok;
+		this.msg = msg;
+	}
+	
+	public SimpleResultBean(boolean ok){
+		super();
+		this.ok = ok;
 	}
 
 	public boolean isOk() {
@@ -15,6 +23,14 @@ public class SimpleResultBean {
 
 	public void setOk(boolean isSuccess) {
 		this.ok = isSuccess;
+	}
+
+	public String getMsg() {
+		return msg;
+	}
+
+	public void setMsg(String msg) {
+		this.msg = msg;
 	}
 
 }
