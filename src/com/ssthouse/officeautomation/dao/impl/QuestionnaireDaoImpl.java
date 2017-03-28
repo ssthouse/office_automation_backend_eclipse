@@ -3,11 +3,8 @@ package com.ssthouse.officeautomation.dao.impl;
 import java.util.List;
 
 import org.hibernate.Session;
-import org.hibernate.criterion.Restrictions;
 
 import com.ssthouse.officeautomation.base.BaseDao;
-import com.ssthouse.officeautomation.controller.bean.QuestionnaireBean;
-import com.ssthouse.officeautomation.controller.bean.QuestionnaireBean.QuestionsBean;
 import com.ssthouse.officeautomation.dao.IQuestionnaireDao;
 import com.ssthouse.officeautomation.domain.QuestionEntity;
 import com.ssthouse.officeautomation.domain.QuestionnaireEntity;

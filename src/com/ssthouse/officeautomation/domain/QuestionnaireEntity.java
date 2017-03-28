@@ -1,9 +1,14 @@
 package com.ssthouse.officeautomation.domain;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  * Created by ssthouse on 27/03/2017.
@@ -16,15 +21,15 @@ public class QuestionnaireEntity {
     private String deadline;
     private int createrId;
 
-    private Set<QuestionEntity> questionSet = new HashSet<QuestionEntity>();
+    private List<QuestionEntity> questions = new ArrayList<QuestionEntity>();
 
     @OneToMany(mappedBy="questionnaireId",targetEntity=QuestionEntity.class)
-    public Set<QuestionEntity> getQuestionSet(){
-    	return questionSet;
+    public List<QuestionEntity> getQuestions(){
+    	return questions;
     }
     
-    public void setQuestionSet(Set<QuestionEntity> questionSet){
-    	this.questionSet = questionSet;
+    public void setQuestions(List<QuestionEntity> questionSet){
+    	this.questions = questionSet;
     }
     
     @Id

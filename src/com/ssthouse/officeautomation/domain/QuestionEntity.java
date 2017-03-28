@@ -1,6 +1,14 @@
 package com.ssthouse.officeautomation.domain;
 
-import javax.persistence.*;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import com.google.gson.annotations.Expose;
 
 /**
  * Created by ssthouse on 27/03/2017.
@@ -14,6 +22,8 @@ public class QuestionEntity {
     private String title;
     private String selections;
     
+    // this field is not include in gson transfer
+    @Expose
     @ManyToOne
     @JoinColumn(name="questionnaire_id")
     private QuestionnaireEntity questionnaireEntity;

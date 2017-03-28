@@ -1,19 +1,12 @@
 package com.ssthouse.officeautomation.dao.impl;
 
-import javax.annotation.Resource;
-
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
-import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.ssthouse.officeautomation.base.BaseDao;
 import com.ssthouse.officeautomation.dao.IUserDao;
 import com.ssthouse.officeautomation.domain.UserEntity;
-import com.ssthouse.officeautomation.util.Log;
 
 public class UserDaoImpl extends BaseDao implements IUserDao {
 

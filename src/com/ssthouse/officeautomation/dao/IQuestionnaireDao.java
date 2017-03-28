@@ -2,7 +2,6 @@ package com.ssthouse.officeautomation.dao;
 
 import java.util.List;
 
-import com.ssthouse.officeautomation.controller.bean.QuestionnaireBean;
 import com.ssthouse.officeautomation.domain.QuestionnaireEntity;
 
 public interface IQuestionnaireDao {
