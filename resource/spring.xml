@@ -27,12 +27,16 @@
 		</property>
 	</bean>
 
-	<!-- DAO bean -->
+	<!-- DAO beans -->
 	<bean id="userDao" class="com.ssthouse.officeautomation.dao.impl.UserDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
 
-	<!-- Service Bean -->
+	<bean id="questionnaireDao" class="com.ssthouse.officeautomation.dao.impl.QuestionnaireDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean> 
+
+	<!-- Service Beans -->
 	<bean id="userInfoService"
 		class="com.ssthouse.officeautomation.service.impl.UserInfoServiceImpl">
 		<property name="userDao" ref="userDao"></property>

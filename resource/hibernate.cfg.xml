@@ -13,6 +13,8 @@
         <property name="hibernate.connection.password">ssthouse</property>
         <!--bean 的映射-->
         <mapping class="com.ssthouse.officeautomation.domain.UserEntity"/> 
+        <mapping class="com.ssthouse.officeautomation.domain.QuestionEntity"/> 
+        <mapping class="com.ssthouse.officeautomation.domain.QuestionnaireEntity"/> 
         <!-- DB schema will be updated if needed -->
         <!-- <property name="hbm2ddl.auto">update</property> -->
     </session-factory>

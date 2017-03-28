@@ -11,8 +11,13 @@ public abstract class BaseDao {
     public void setSessionFactory(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
-    protected Session getSession() {
+    
+    public Session getSession() {
 		return sessionFactory.getCurrentSession();
 	}
 
+    public SessionFactory getSessionFactory(){
+    	return sessionFactory;
+    }
+    
 }

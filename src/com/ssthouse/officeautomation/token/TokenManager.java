@@ -2,8 +2,10 @@ package com.ssthouse.officeautomation.token;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.mysql.jdbc.authentication.Sha256PasswordPlugin;
+import com.ssthouse.officeautomation.controller.bean.SimpleResultBean;
 import com.ssthouse.officeautomation.token.cons.TokenCons;
 import com.ssthouse.officeautomation.util.Log;
 import com.ssthouse.officeautomation.util.StringUtil;
@@ -102,20 +104,22 @@ public class TokenManager {
 
 	/**
 	 * 从token中解析出 username 信息
+	 * 
 	 * @param token
 	 * @return
 	 */
-	public static String getTokenUsername(String token){
-		try{
+	public static String getTokenUsername(String token) {
+		try {
 			// 1.判断是否符合 secret 签名
 			Jws<Claims> jws = Jwts.parser().setSigningKey(TokenCons.TOKEN_SECRET).parseClaimsJws(token);
 			// body 中
-			if(!jws.getBody().containsKey(KEY_CLAIM_USERNAME)){
+			if (!jws.getBody().containsKey(KEY_CLAIM_USERNAME)) {
 				return "";
 			}
 			return (String) jws.getBody().get(KEY_CLAIM_USERNAME);
-		}catch(SignatureException e){
+		} catch (SignatureException e) {
 			return "";
 		}
 	}
+
 }

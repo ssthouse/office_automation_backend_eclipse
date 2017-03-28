@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.ssthouse.officeautomation.controller.bean.SimpleResultBean;
 import com.ssthouse.officeautomation.controller.bean.UserBean;
 import com.ssthouse.officeautomation.controller.bean.UserResultBean;
+import com.ssthouse.officeautomation.controller.cons.ControllerCons;
 import com.ssthouse.officeautomation.dao.impl.UserDaoImpl;
 import com.ssthouse.officeautomation.domain.UserEntity;
 import com.ssthouse.officeautomation.service.IUserInfoService;
@@ -18,7 +19,9 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -39,13 +42,12 @@ public class UserController {
 	 * @return
 	 */
 	@CrossOrigin
-	@RequestMapping(value = "/info", produces = { "application/json;charset=UTF-8" }, method = RequestMethod.GET)
+	@GetMapping(value = "/info", produces = { ControllerCons.PRODUCES_UTF_8 })
 	@ResponseBody
 	public String getUserInfo(HttpServletRequest request) {
-		Log.error("user/info  ****************************");
-//		if (!TokenManager.verifyToken(request)) {
-//			return new Gson().toJson(new UserResultBean(false, "token 过期", null));
-//		}
+		if (!TokenManager.verifyToken(request)) {
+			return new Gson().toJson(new UserResultBean(false, "token 过期", null));
+		}
 		// 根据token获取UserEntity
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
 		IUserInfoService userInfoService = context.getBean(IUserInfoService.class);
@@ -57,30 +59,16 @@ public class UserController {
 	}
 
 	@CrossOrigin
-	@RequestMapping(value = "/info",  produces = { "application/json;charset=UTF-8" },method = RequestMethod.POST)
+	@PostMapping(value = "/info", produces = { ControllerCons.PRODUCES_UTF_8 })
 	@ResponseBody
 	public String modifyUserInfo(@RequestBody UserEntity userEntity, HttpServletRequest request) {
-//		if (!TokenManager.verifyToken(request)) {
-//			return new Gson().toJson(new SimpleResultBean(false, "token无效"));
-//		}
-		// TODO 根据username找到UserEntity
+		if (!TokenManager.verifyToken(request)) {
+			return new Gson().toJson(new SimpleResultBean(false, "token无效"));
+		}
+		// 根据username找到UserEntity
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
 		IUserInfoService userInfoService = context.getBean(IUserInfoService.class);
 		boolean result = userInfoService.updateUserInfo(userEntity, request.getHeader("token"));
 		return new Gson().toJson(new SimpleResultBean(result));
 	}
-
-	@CrossOrigin
-	@RequestMapping("/{username}/blog/{blogId}")
-	@ResponseBody
-	public String getUserBlogInfo(@PathVariable String username, @PathVariable int blogId) {
-		return String.format("username: %s; blogId: %d", username, blogId);
-	}
-
-	@CrossOrigin
-	@RequestMapping("/index")
-	public String getIndex() {
-		return "test";
-	}
-
 }
