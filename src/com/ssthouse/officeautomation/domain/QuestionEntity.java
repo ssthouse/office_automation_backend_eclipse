@@ -13,6 +13,10 @@ public class QuestionEntity {
     private String type;
     private String title;
     private String selections;
+    
+    @ManyToOne
+    @JoinColumn(name="questionnaire_id")
+    private QuestionnaireEntity questionnaireEntity;
 
     @Id
     @Column(name = "id", nullable = false)

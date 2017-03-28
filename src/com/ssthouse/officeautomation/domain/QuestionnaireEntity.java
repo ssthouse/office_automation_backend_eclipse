@@ -1,5 +1,8 @@
 package com.ssthouse.officeautomation.domain;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.*;
 
 /**
@@ -13,6 +16,17 @@ public class QuestionnaireEntity {
     private String deadline;
     private int createrId;
 
+    private Set<QuestionEntity> questionSet = new HashSet<QuestionEntity>();
+
+    @OneToMany(mappedBy="questionnaireId",targetEntity=QuestionEntity.class)
+    public Set<QuestionEntity> getQuestionSet(){
+    	return questionSet;
+    }
+    
+    public void setQuestionSet(Set<QuestionEntity> questionSet){
+    	this.questionSet = questionSet;
+    }
+    
     @Id
     @Column(name = "questionnaire_id", nullable = false)
     public int getQuestionnaireId() {
