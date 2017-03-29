@@ -2,6 +2,7 @@ package com.ssthouse.officeautomation.service.impl;
 
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ssthouse.officeautomation.base.BaseService;
 import com.ssthouse.officeautomation.dao.IUserDao;
 import com.ssthouse.officeautomation.domain.UserEntity;
 import com.ssthouse.officeautomation.service.IUserInfoService;
@@ -10,18 +11,8 @@ import com.ssthouse.officeautomation.util.BeanValidator;
 import com.ssthouse.officeautomation.util.Log;
 import com.ssthouse.officeautomation.util.StringUtil;
 
-public class UserInfoServiceImpl implements IUserInfoService {
+public class UserInfoServiceImpl extends BaseService<IUserDao> implements IUserInfoService {
 
-	private IUserDao userDao;
-
-	public void setUserDao(IUserDao userDao) {
-		this.userDao = userDao;
-	}
-
-	public IUserDao getUserDao() {
-		return userDao;
-	}
-	
 	@Override
 	public boolean updateUserInfo(UserEntity userEntity, String token) {
 		UserEntity databaseUserEntity = getUserInfo(token);
@@ -52,7 +43,7 @@ public class UserInfoServiceImpl implements IUserInfoService {
 		if (!StringUtil.isEmpty(userEntity.getDepartment())) {
 			databaseUserEntity.setDepartment(userEntity.getDepartment());
 		}
-		userDao.updateUserEntity(databaseUserEntity);
+		getDao().updateUserEntity(databaseUserEntity);
 		return true;
 	}
 
@@ -62,7 +53,7 @@ public class UserInfoServiceImpl implements IUserInfoService {
 		if (StringUtil.isEmpty(username)) {
 			return null;
 		}
-		return userDao.getUserEntity(username);
+		return getDao().getUserEntity(username);
 	}
 
 }

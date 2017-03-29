@@ -7,5 +7,8 @@ import com.ssthouse.officeautomation.domain.QuestionnaireEntity;
 public interface IQuestionnaireDao {
 
 	//TODO 用作测试用:  获取所有数据库中questionnaire
-	public List<QuestionnaireEntity> getAllQuestionnaire();
+	List<QuestionnaireEntity> getAllQuestionnaire();
+	
+	void saveQuestionnaire(QuestionnaireEntity questionnaireEntity);
+	
 }

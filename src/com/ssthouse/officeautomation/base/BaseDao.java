@@ -20,4 +20,8 @@ public abstract class BaseDao {
     	return sessionFactory;
     }
     
+    public Session openSession(){
+    	return sessionFactory.openSession();
+    }
+    
 }

@@ -17,6 +17,7 @@ import com.ssthouse.officeautomation.controller.util.ResultHelper;
 import com.ssthouse.officeautomation.dao.IQuestionnaireDao;
 import com.ssthouse.officeautomation.dao.impl.QuestionnaireDaoImpl;
 import com.ssthouse.officeautomation.domain.QuestionnaireEntity;
+import com.ssthouse.officeautomation.service.IQuestionnaireService;
 import com.ssthouse.officeautomation.token.TokenManager;
 import com.ssthouse.officeautomation.util.Log;
 
@@ -32,6 +33,10 @@ public class QuestionanireController {
 			return ResultHelper.generateTokenInvalidResult();
 		}
 		// TODO save requestion.body to databases
+		//TODO 判断问卷时候有效
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
+		IQuestionnaireService service = (IQuestionnaireService) context.getBean(IQuestionnaireService.class);
+		service.saveQuestionnaire(questionnaireEntity);
 		Log.error(new Gson().toJson(questionnaireEntity));
 		return ResultHelper.generateSimpleResult(true, "保存成功");
 	}
@@ -45,6 +50,6 @@ public class QuestionanireController {
 		}
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
 		QuestionnaireDaoImpl questionnaireDao = (QuestionnaireDaoImpl) context.getBean(IQuestionnaireDao.class);
-		return new Gson().toJson(questionnaireDao.getQuestionnaire());
+		return new Gson().toJson(questionnaireDao.getAllQuestionnaire());
 	}
 }

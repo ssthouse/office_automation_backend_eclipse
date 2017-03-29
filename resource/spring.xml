@@ -39,7 +39,12 @@
 	<!-- Service Beans -->
 	<bean id="userInfoService"
 		class="com.ssthouse.officeautomation.service.impl.UserInfoServiceImpl">
-		<property name="userDao" ref="userDao"></property>
+		<property name="dao" ref="userDao"></property>
+	</bean>
+	
+	<bean id="questionnaireSerice"
+	class="com.ssthouse.officeautomation.service.impl.QuestionnaireServiceImpl">
+		<property name="dao" ref="questionnaireDao"></property>
 	</bean>
 
 	<!-- 暂时不知道是做什么用的... -->

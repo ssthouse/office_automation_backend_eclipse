@@ -3,12 +3,15 @@ package com.ssthouse.officeautomation.domain;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.google.gson.annotations.Expose;
+import com.ssthouse.officeautomation.util.Log;
 
 /**
  * Created by ssthouse on 27/03/2017.
@@ -29,6 +32,7 @@ public class QuestionEntity {
     private QuestionnaireEntity questionnaireEntity;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     public int getId() {
         return id;
@@ -80,6 +84,7 @@ public class QuestionEntity {
 
     @Override
     public boolean equals(Object o) {
+    	Log.error("*****************this  is called**********************");
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
