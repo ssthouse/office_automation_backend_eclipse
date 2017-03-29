@@ -12,6 +12,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import com.ssthouse.officeautomation.util.Log;
+import com.ssthouse.officeautomation.util.StringUtil;
 
 /**
  * Created by ssthouse on 27/03/2017.
@@ -19,84 +23,106 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "questionnaire", schema = "office_automation", catalog = "")
 public class QuestionnaireEntity {
-    private int questionnaireId;
-    private String title;
-    private String deadline;
-    private int createrId;
+	private int questionnaireId;
+	private String title;
+	private String deadline;
+	private String createrId;
 
-    private List<QuestionEntity> questions = new ArrayList<QuestionEntity>();
+	private List<QuestionEntity> questions = new ArrayList<QuestionEntity>();
 
-    @OneToMany(mappedBy="questionnaireId",targetEntity=QuestionEntity.class, cascade={CascadeType.ALL})
-    public List<QuestionEntity> getQuestions(){
-    	return questions;
-    }
-    
-    public void setQuestions(List<QuestionEntity> questionSet){
-    	this.questions = questionSet;
-    }
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "questionnaire_id", nullable = false)
-    public int getQuestionnaireId() {
-        return questionnaireId;
-    }
+	@OneToMany(mappedBy = "questionnaireId", targetEntity = QuestionEntity.class, cascade = { CascadeType.ALL })
+	public List<QuestionEntity> getQuestions() {
+		return questions;
+	}
 
-    public void setQuestionnaireId(int questionnaireId) {
-        this.questionnaireId = questionnaireId;
-    }
+	public void setQuestions(List<QuestionEntity> questionSet) {
+		this.questions = questionSet;
+	}
 
-    @Basic
-    @Column(name = "title", nullable = false, length = 100)
-    public String getTitle() {
-        return title;
-    }
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "questionnaire_id", nullable = false)
+	public int getQuestionnaireId() {
+		return questionnaireId;
+	}
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+	public void setQuestionnaireId(int questionnaireId) {
+		this.questionnaireId = questionnaireId;
+	}
 
-    @Basic
-    @Column(name = "deadline", nullable = false, length = 20)
-    public String getDeadline() {
-        return deadline;
-    }
+	@Basic
+	@Column(name = "title", nullable = false, length = 100)
+	public String getTitle() {
+		return title;
+	}
 
-    public void setDeadline(String deadline) {
-        this.deadline = deadline;
-    }
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
-    @Basic
-    @Column(name = "creater_id", nullable = false)
-    public int getCreaterId() {
-        return createrId;
-    }
+	@Basic
+	@Column(name = "deadline", nullable = false, length = 30)
+	public String getDeadline() {
+		return deadline;
+	}
 
-    public void setCreaterId(int createrId) {
-        this.createrId = createrId;
-    }
+	public void setDeadline(String deadline) {
+		this.deadline = deadline;
+	}
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+	@Basic
+	@Column(name = "creater_id", nullable = false, length = 20)
+	public String getCreaterId() {
+		return createrId;
+	}
 
-        QuestionnaireEntity that = (QuestionnaireEntity) o;
+	public void setCreaterId(String createrId) {
+		this.createrId = createrId;
+	}
 
-        if (questionnaireId != that.questionnaireId) return false;
-        if (createrId != that.createrId) return false;
-        if (title != null ? !title.equals(that.title) : that.title != null) return false;
-        if (deadline != null ? !deadline.equals(that.deadline) : that.deadline != null) return false;
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
 
-        return true;
-    }
+		QuestionnaireEntity that = (QuestionnaireEntity) o;
 
-    @Override
-    public int hashCode() {
-        int result = questionnaireId;
-        result = 31 * result + (title != null ? title.hashCode() : 0);
-        result = 31 * result + (deadline != null ? deadline.hashCode() : 0);
-        result = 31 * result + createrId;
-        return result;
-    }
+		if (questionnaireId != that.questionnaireId)
+			return false;
+		if (createrId != that.createrId)
+			return false;
+		if (title != null ? !title.equals(that.title) : that.title != null)
+			return false;
+		if (deadline != null ? !deadline.equals(that.deadline) : that.deadline != null)
+			return false;
+
+		return true;
+	}
+
+	@Override
+	public int hashCode() {
+		int result = questionnaireId;
+		result = 31 * result + (title != null ? title.hashCode() : 0);
+		result = 31 * result + (deadline != null ? deadline.hashCode() : 0);
+		result = 31 * result + (createrId != null ? createrId.hashCode() : 0);
+		return result;
+	}
+
+	@Transient
+	public boolean isValid() {
+		if (StringUtil.isEmpty(title, deadline, createrId)) {
+			return false;
+		}
+		if (questions == null || questions.size() == 0) {
+			return false;
+		}
+		for (QuestionEntity questionEntity : questions) {
+			if (!questionEntity.isValid()) {
+				return false;
+			}
+		}
+		return true;
+	}
 }

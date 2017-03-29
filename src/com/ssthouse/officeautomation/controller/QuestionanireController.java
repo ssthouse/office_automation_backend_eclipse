@@ -3,8 +3,10 @@ package com.ssthouse.officeautomation.controller;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -33,7 +35,9 @@ public class QuestionanireController {
 			return ResultHelper.generateTokenInvalidResult();
 		}
 		// TODO save requestion.body to databases
-		//TODO 判断问卷时候有效
+		if(questionnaireEntity == null || !questionnaireEntity.isValid()){
+			return ResultHelper.generateSimpleResult(false, "请求数据不完整");
+		}
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
 		IQuestionnaireService service = (IQuestionnaireService) context.getBean(IQuestionnaireService.class);
 		service.saveQuestionnaire(questionnaireEntity);
@@ -52,4 +56,10 @@ public class QuestionanireController {
 		QuestionnaireDaoImpl questionnaireDao = (QuestionnaireDaoImpl) context.getBean(IQuestionnaireDao.class);
 		return new Gson().toJson(questionnaireDao.getAllQuestionnaire());
 	}
+	
+	@ExceptionHandler  
+    @ResponseBody  
+    public String handleException(HttpMessageNotReadableException exception) { 
+        return ResultHelper.generateSimpleResult(true, "请求数据格式错误");  
+    }  
 }
