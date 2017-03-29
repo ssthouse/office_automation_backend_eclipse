@@ -157,4 +157,12 @@ public class UserEntity {
 		result = 31 * result + (department != null ? department.hashCode() : 0);
 		return result;
 	}
+	
+	@Transient
+	public boolean isValid(){
+		if(StringUtil.isEmpty(username) || StringUtil.isEmpty(password)){
+			return false;
+		}
+		return true;
+	}
 }

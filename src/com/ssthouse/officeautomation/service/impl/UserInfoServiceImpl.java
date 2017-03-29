@@ -16,7 +16,7 @@ public class UserInfoServiceImpl extends BaseService<IUserDao> implements IUserI
 	@Override
 	public boolean updateUserInfo(UserEntity userEntity, String token) {
 		UserEntity databaseUserEntity = getUserInfo(token);
-		if (!BeanValidator.isValidate(databaseUserEntity)) {
+		if (!databaseUserEntity.isValid()) {
 			return false;
 		}
 		// 更新基本信息
@@ -27,7 +27,6 @@ public class UserInfoServiceImpl extends BaseService<IUserDao> implements IUserI
 			databaseUserEntity.setPassword(userEntity.getPassword());
 		}
 		if (!StringUtil.isEmpty(userEntity.getDescription())) {
-			Log.error(userEntity.getDescription() + "*****************************");
 			databaseUserEntity.setDescription(userEntity.getDescription());
 		}
 		// 更新详细信息

@@ -9,9 +9,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.google.gson.annotations.Expose;
 import com.ssthouse.officeautomation.util.Log;
+import com.ssthouse.officeautomation.util.StringUtil;
 
 /**
  * Created by ssthouse on 27/03/2017.
@@ -24,6 +26,10 @@ public class QuestionEntity {
     private String type;
     private String title;
     private String selections;
+    
+    private static final String TYPE_RADIO = "radio";
+    private static final String TYPE_CHECKBOX = "checkbox";
+    private static final String TYPE_TEXTAREA = "textArea";
     
     // this field is not include in gson transfer
     @Expose
@@ -84,7 +90,6 @@ public class QuestionEntity {
 
     @Override
     public boolean equals(Object o) {
-    	Log.error("*****************this  is called**********************");
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
@@ -108,5 +113,19 @@ public class QuestionEntity {
         result = 31 * result + (title != null ? title.hashCode() : 0);
         result = 31 * result + (selections != null ? selections.hashCode() : 0);
         return result;
+    }
+    
+    @Transient
+    public boolean isValid(){
+    	if(StringUtil.isEmpty(type) || StringUtil.isEmpty(title)){
+    		return false;
+    	}
+    	if(type.equals(TYPE_TEXTAREA) && StringUtil.isEmpty(title)){
+    		return false;
+    	}
+    	if(!type.equals(TYPE_TEXTAREA) && StringUtil.isEmpty(selections)){
+    		return false;
+    	}
+    	return true;
     }
 }

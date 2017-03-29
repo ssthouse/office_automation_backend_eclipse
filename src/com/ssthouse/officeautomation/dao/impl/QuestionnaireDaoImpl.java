@@ -11,7 +11,6 @@ import com.ssthouse.officeautomation.dao.IQuestionnaireDao;
 import com.ssthouse.officeautomation.domain.QuestionEntity;
 import com.ssthouse.officeautomation.domain.QuestionnaireEntity;
 import com.ssthouse.officeautomation.util.Log;
-import com.sun.org.apache.bcel.internal.generic.NEW;
 
 public class QuestionnaireDaoImpl extends BaseDao implements IQuestionnaireDao {
 
@@ -44,7 +43,6 @@ public class QuestionnaireDaoImpl extends BaseDao implements IQuestionnaireDao {
 		Session session = openSession();
 		Transaction transaction = session.beginTransaction();
 		session.save(questionnaireEntity);
-		Log.error("this is the new questionnaire id :" + questionnaireEntity.getQuestionnaireId());
 		for(QuestionEntity questionEntity : questionnaireEntity.getQuestions()){
 			questionEntity.setQuestionnaireId(questionnaireEntity.getQuestionnaireId());
 		}

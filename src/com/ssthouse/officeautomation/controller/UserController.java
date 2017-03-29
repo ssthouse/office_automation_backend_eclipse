@@ -52,7 +52,7 @@ public class UserController {
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
 		IUserInfoService userInfoService = context.getBean(IUserInfoService.class);
 		UserEntity userEntity = userInfoService.getUserInfo(request.getHeader("token"));
-		if (!BeanValidator.isValidate(userEntity)) {
+		if (!userEntity.isValid()) {
 			return new Gson().toJson(new UserResultBean(false, "未找到用户", null));
 		}
 		return new Gson().toJson(new UserResultBean(true, userEntity));
