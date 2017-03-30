@@ -5,12 +5,14 @@
 <hibernate-configuration>
     <session-factory>
         <!--一些配置属性-->
-        <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+       <!--  <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="show_sql">true</property>
         <property name="connection.url">jdbc:mysql://localhost:3306/office_automation</property>
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
         <property name="hibernate.connection.username">root</property>
-        <property name="hibernate.connection.password">ssthouse</property>
+        <property name="hibernate.connection.password">ssthouse</property> -->
+        
+        
         <!--bean 的映射-->
         <mapping class="com.ssthouse.officeautomation.domain.UserEntity"/> 
         <mapping class="com.ssthouse.officeautomation.domain.QuestionEntity"/> 

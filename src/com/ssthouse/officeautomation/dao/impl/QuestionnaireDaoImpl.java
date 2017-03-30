@@ -57,10 +57,10 @@ public class QuestionnaireDaoImpl extends BaseDao implements IQuestionnaireDao {
 	@Override
 	public List<QuestionnaireEntity> getOwnedQuestionnaires(String createrId) {
 		Session session = openSession();
-		Transaction transaction = session.beginTransaction();
+		session.beginTransaction();
 		List<QuestionnaireEntity> ownedList = session.createCriteria(QuestionnaireEntity.class)
 				.add(Restrictions.eq(COLUMN_CREATER_ID, createrId)).list();
-		transaction.commit();
+		session.getTransaction().commit();
 		return ownedList;
 	}
 
