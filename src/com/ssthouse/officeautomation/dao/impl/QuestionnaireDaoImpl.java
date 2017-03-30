@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 
 import com.google.gson.Gson;
 import com.ssthouse.officeautomation.base.BaseDao;
@@ -13,6 +14,8 @@ import com.ssthouse.officeautomation.domain.QuestionnaireEntity;
 import com.ssthouse.officeautomation.util.Log;
 
 public class QuestionnaireDaoImpl extends BaseDao implements IQuestionnaireDao {
+
+	private static final String COLUMN_CREATER_ID = "createrId";
 
 	@Override
 	public List<QuestionnaireEntity> getAllQuestionnaire() {
@@ -43,10 +46,29 @@ public class QuestionnaireDaoImpl extends BaseDao implements IQuestionnaireDao {
 		Session session = openSession();
 		Transaction transaction = session.beginTransaction();
 		session.save(questionnaireEntity);
-		for(QuestionEntity questionEntity : questionnaireEntity.getQuestions()){
+		for (QuestionEntity questionEntity : questionnaireEntity.getQuestions()) {
 			questionEntity.setQuestionnaireId(questionnaireEntity.getQuestionnaireId());
 		}
 		session.update(questionnaireEntity);
 		transaction.commit();
+	}
+
+	@Override
+	public List<QuestionnaireEntity> getOpenQuestionnaire(String username) {
+		Session session = openSession();
+		Transaction transaction = session.beginTransaction();
+		List<QuestionnaireEntity> openList = session.createCriteria(QuestionnaireEntity.class).list();
+		transaction.commit();
+		return openList;
+	}
+
+	@Override
+	public List<QuestionnaireEntity> getOwnedQuestionnaires(String createrId) {
+		Session session = openSession();
+		Transaction transaction = session.beginTransaction();
+		List<QuestionnaireEntity> ownedList = session.createCriteria(QuestionnaireEntity.class)
+				.add(Restrictions.eq(COLUMN_CREATER_ID, createrId)).list();
+		transaction.commit();
+		return ownedList;
 	}
 }

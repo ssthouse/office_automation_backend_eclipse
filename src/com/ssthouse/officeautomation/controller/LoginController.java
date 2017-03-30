@@ -2,31 +2,23 @@ package com.ssthouse.officeautomation.controller;
 
 import java.io.IOException;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
-import com.ssthouse.officeautomation.constant.SessionCons;
-import com.ssthouse.officeautomation.controller.bean.SimpleResultBean;
 import com.ssthouse.officeautomation.controller.bean.TokenResultBean;
 import com.ssthouse.officeautomation.controller.bean.UserBean;
 import com.ssthouse.officeautomation.dao.impl.UserDaoImpl;
 import com.ssthouse.officeautomation.domain.UserEntity;
 import com.ssthouse.officeautomation.token.TokenManager;
-import com.ssthouse.officeautomation.token.cons.TokenCons;
 import com.ssthouse.officeautomation.util.Log;
 import com.ssthouse.officeautomation.util.StringUtil;
-import com.sun.org.apache.bcel.internal.generic.NEW;
 
 @Controller
 @RequestMapping("/")

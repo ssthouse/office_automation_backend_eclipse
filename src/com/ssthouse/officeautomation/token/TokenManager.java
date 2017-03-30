@@ -2,13 +2,11 @@ package com.ssthouse.officeautomation.token;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.mysql.jdbc.authentication.Sha256PasswordPlugin;
-import com.ssthouse.officeautomation.controller.bean.SimpleResultBean;
 import com.ssthouse.officeautomation.token.cons.TokenCons;
 import com.ssthouse.officeautomation.util.Log;
 import com.ssthouse.officeautomation.util.StringUtil;
+import com.ssthouse.officeautomation.util.constant.Constant;
 import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
 
 import io.jsonwebtoken.Claims;
@@ -16,8 +14,6 @@ import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.SignatureException;
-import sun.launcher.resources.launcher;
-import sun.tools.jar.resources.jar_es;
 
 public class TokenManager {
 
@@ -80,6 +76,9 @@ public class TokenManager {
 	 * @return
 	 */
 	public static boolean verifyToken(HttpServletRequest request) {
+		if(Constant.DEBUG){
+			return true;
+		}
 		if (request == null || StringUtil.isEmpty(request.getHeader("token"))) {
 			return false;
 		}
@@ -109,6 +108,9 @@ public class TokenManager {
 	 * @return
 	 */
 	public static String getTokenUsername(String token) {
+		if(Constant.DEBUG){
+			return Constant.DEV_USERNAME;
+		}
 		try {
 			// 1.判断是否符合 secret 签名
 			Jws<Claims> jws = Jwts.parser().setSigningKey(TokenCons.TOKEN_SECRET).parseClaimsJws(token);

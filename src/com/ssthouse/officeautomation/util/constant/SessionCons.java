@@ -1,4 +1,4 @@
-package com.ssthouse.officeautomation.constant;
+package com.ssthouse.officeautomation.util.constant;
 
 public class SessionCons {
 	public static final String KEY_USERNAME = "username";
