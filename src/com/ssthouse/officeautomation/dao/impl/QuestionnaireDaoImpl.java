@@ -17,14 +17,6 @@ public class QuestionnaireDaoImpl extends BaseDao implements IQuestionnaireDao {
 
 	private static final String COLUMN_CREATER_ID = "createrId";
 
-	@Override
-	public List<QuestionnaireEntity> getAllQuestionnaire() {
-		Session session = openSession();
-		session.beginTransaction();
-		List<QuestionnaireEntity> result = session.createCriteria(QuestionnaireEntity.class).list();
-		return result;
-	}
-
 	public QuestionnaireEntity getQuestionnaire() {
 		Session session = openSession();
 		session.beginTransaction();
@@ -70,5 +62,14 @@ public class QuestionnaireDaoImpl extends BaseDao implements IQuestionnaireDao {
 				.add(Restrictions.eq(COLUMN_CREATER_ID, createrId)).list();
 		transaction.commit();
 		return ownedList;
+	}
+
+	@Override
+	public void updateQuestionnaire(QuestionnaireEntity questionnaireEntity) {
+		Session session = getSession();
+		Transaction transaction = session.beginTransaction();
+		session.update(questionnaireEntity);
+		transaction.commit();
+		session.close();
 	}
 }

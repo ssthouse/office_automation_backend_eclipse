@@ -6,10 +6,9 @@ import com.ssthouse.officeautomation.domain.QuestionnaireEntity;
 
 public interface IQuestionnaireDao {
 
-	// TODO 用作测试用: 获取所有数据库中questionnaire
-	List<QuestionnaireEntity> getAllQuestionnaire();
-
 	void saveQuestionnaire(QuestionnaireEntity questionnaireEntity);
+
+	void updateQuestionnaire(QuestionnaireEntity questionnaireEntity);
 
 	/**
 	 * 获取对用户公开的questionnaire
@@ -18,9 +17,10 @@ public interface IQuestionnaireDao {
 	 * @return
 	 */
 	List<QuestionnaireEntity> getOpenQuestionnaire(String username);
-	
+
 	/**
 	 * 获取用户管理的questionnaire
+	 * 
 	 * @param createrId
 	 * @return
 	 */
