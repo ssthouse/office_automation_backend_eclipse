@@ -26,6 +26,7 @@ public class QuestionnaireEntity {
 	private String title;
 	private String deadline;
 	private String createrId;
+	private boolean published;
 
 	private List<QuestionEntity> questions = new ArrayList<QuestionEntity>();
 
@@ -77,6 +78,16 @@ public class QuestionnaireEntity {
 
 	public void setCreaterId(String createrId) {
 		this.createrId = createrId;
+	}
+	
+	@Basic
+	@Column(name="published", nullable = false, columnDefinition = "TINYINT(1)")
+	public boolean getPublished(){
+		return published;
+	}
+	
+	public void setPublished(boolean published){
+		this.published = published;
 	}
 
 	@Override
