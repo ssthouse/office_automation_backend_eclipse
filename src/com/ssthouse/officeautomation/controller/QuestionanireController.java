@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.stereotype.Controller;
@@ -41,7 +42,7 @@ public class QuestionanireController {
 		}
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
 		IQuestionnaireService service = (IQuestionnaireService) context.getBean(IQuestionnaireService.class);
-		service.saveQuestionnaire(questionnaireEntity);
+		service.saveOrUpdateQuestionnaire(questionnaireEntity);
 		Log.error(new Gson().toJson(questionnaireEntity));
 		return ResultHelper.generateSimpleResult(true, "保存成功");
 	}
@@ -53,7 +54,7 @@ public class QuestionanireController {
 		if (!TokenManager.verifyToken(request)) {
 			return ResultHelper.generateTokenInvalidResult();
 		}
-		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
+		ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
 		IQuestionnaireService questionnaireService = (IQuestionnaireService) context.getBean(IQuestionnaireService.class);
 		List<QuestionnaireEntity> openList = questionnaireService.getOpenQuestionnaireList(request);
 		List<QuestionnaireEntity> ownedList = questionnaireService.getOwnedQuestionnaireList(request);

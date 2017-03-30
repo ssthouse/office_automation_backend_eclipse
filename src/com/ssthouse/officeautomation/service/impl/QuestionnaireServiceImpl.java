@@ -13,15 +13,7 @@ import com.ssthouse.officeautomation.token.TokenManager;
 public class QuestionnaireServiceImpl extends BaseService<IQuestionnaireDao> implements IQuestionnaireService {
 
 	private static final int UNSAVED_QUESTIONNAIRE = 0;
-	
-	@Override
-	public void saveQuestionnaire(QuestionnaireEntity questionnaireEntity) {
-		if(questionnaireEntity.getQuestionnaireId() == UNSAVED_QUESTIONNAIRE){
-			getDao().saveQuestionnaire(questionnaireEntity);
-		}else{
-			getDao().updateQuestionnaire(questionnaireEntity);
-		}
-	}
+
 
 	@Override
 	public List<QuestionnaireEntity> getOpenQuestionnaireList(HttpServletRequest request) {
@@ -33,6 +25,18 @@ public class QuestionnaireServiceImpl extends BaseService<IQuestionnaireDao> imp
 	public List<QuestionnaireEntity> getOwnedQuestionnaireList(HttpServletRequest request) {
 		String createrId = TokenManager.getTokenUsername(request.getHeader("token"));
 		return getDao().getOwnedQuestionnaires(createrId);
+	}
+
+	@Override
+	public void saveOrUpdateQuestionnaire(QuestionnaireEntity questionnaireEntity) {
+		if (questionnaireEntity == null || !questionnaireEntity.isValid()) {
+			return;
+		}
+		if (questionnaireEntity.getQuestionnaireId() == UNSAVED_QUESTIONNAIRE) {
+			getDao().saveQuestionnaire(questionnaireEntity);
+		} else {
+			getDao().updateQuestionnaire(questionnaireEntity);
+		}
 	}
 
 }
