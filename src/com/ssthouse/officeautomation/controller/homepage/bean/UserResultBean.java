@@ -1,4 +1,4 @@
-package com.ssthouse.officeautomation.controller.bean;
+package com.ssthouse.officeautomation.controller.homepage.bean;
 
 import com.ssthouse.officeautomation.domain.UserEntity;
 

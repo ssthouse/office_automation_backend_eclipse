@@ -1,4 +1,4 @@
-package com.ssthouse.officeautomation.controller;
+package com.ssthouse.officeautomation.controller.homepage;
 
 import java.io.IOException;
 
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.google.gson.Gson;
 import com.ssthouse.officeautomation.controller.bean.TokenResultBean;
-import com.ssthouse.officeautomation.controller.bean.UserBean;
+import com.ssthouse.officeautomation.controller.homepage.bean.UserBean;
 import com.ssthouse.officeautomation.dao.impl.UserDaoImpl;
 import com.ssthouse.officeautomation.domain.UserEntity;
 import com.ssthouse.officeautomation.token.TokenManager;

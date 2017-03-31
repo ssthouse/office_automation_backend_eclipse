@@ -71,9 +71,8 @@ public class QuestionnaireDaoImpl extends BaseDao implements IQuestionnaireDao {
 		// delete ralated question
 		List<QuestionEntity> oldQuestionList = session.createCriteria(QuestionEntity.class)
 				.add(Restrictions.eq("questionnaireId", questionnaireEntity.getQuestionnaireId())).list();
-		for(QuestionEntity questionEntity : oldQuestionList){
+		for (QuestionEntity questionEntity : oldQuestionList) {
 			session.delete(questionEntity);
-			Log.error("what teh funck*******************");
 		}
 		transaction.commit();
 		session = openSession();
@@ -82,7 +81,7 @@ public class QuestionnaireDaoImpl extends BaseDao implements IQuestionnaireDao {
 			questionEntity.setQuestionnaireId(questionnaireEntity.getQuestionnaireId());
 			session.save(questionEntity);
 		}
-		//save or update now
+		// save or update now
 		session.saveOrUpdate(questionnaireEntity);
 		transaction.commit();
 		session.close();

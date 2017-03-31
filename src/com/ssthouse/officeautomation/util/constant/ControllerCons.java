@@ -1,4 +1,4 @@
-package com.ssthouse.officeautomation.controller.cons;
+package com.ssthouse.officeautomation.util.constant;
 
 public class ControllerCons {
 

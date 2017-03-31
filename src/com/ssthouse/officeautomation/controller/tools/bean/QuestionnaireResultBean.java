@@ -1,4 +1,4 @@
-package com.ssthouse.officeautomation.controller.bean;
+package com.ssthouse.officeautomation.controller.tools.bean;
 
 import java.util.List;
 

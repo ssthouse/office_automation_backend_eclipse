@@ -27,9 +27,9 @@ public class QuestionEntity {
     private String title;
     private String selections;
     
-    private static final String TYPE_RADIO = "radio";
-    private static final String TYPE_CHECKBOX = "checkbox";
-    private static final String TYPE_TEXTAREA = "textArea";
+    public static final String TYPE_RADIO = "radio";
+    public static final String TYPE_CHECKBOX = "checkbox";
+    public static final String TYPE_TEXTAREA = "textArea";
     
     // this field is not include in gson transfer
     @Expose

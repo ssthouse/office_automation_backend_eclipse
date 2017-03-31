@@ -1,10 +1,9 @@
-package com.ssthouse.officeautomation.controller;
+package com.ssthouse.officeautomation.controller.homepage;
 
 import com.google.gson.Gson;
 import com.ssthouse.officeautomation.controller.bean.SimpleResultBean;
-import com.ssthouse.officeautomation.controller.bean.UserBean;
-import com.ssthouse.officeautomation.controller.bean.UserResultBean;
-import com.ssthouse.officeautomation.controller.cons.ControllerCons;
+import com.ssthouse.officeautomation.controller.homepage.bean.UserBean;
+import com.ssthouse.officeautomation.controller.homepage.bean.UserResultBean;
 import com.ssthouse.officeautomation.dao.impl.UserDaoImpl;
 import com.ssthouse.officeautomation.domain.UserEntity;
 import com.ssthouse.officeautomation.service.IUserInfoService;
@@ -12,6 +11,7 @@ import com.ssthouse.officeautomation.token.TokenManager;
 import com.ssthouse.officeautomation.util.BeanValidator;
 import com.ssthouse.officeautomation.util.Log;
 import com.ssthouse.officeautomation.util.StringUtil;
+import com.ssthouse.officeautomation.util.constant.ControllerCons;
 import com.sun.org.apache.bcel.internal.generic.NEW;
 
 import javax.servlet.http.HttpServletRequest;

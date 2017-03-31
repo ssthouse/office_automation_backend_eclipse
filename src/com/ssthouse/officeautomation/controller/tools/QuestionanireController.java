@@ -1,4 +1,4 @@
-package com.ssthouse.officeautomation.controller;
+package com.ssthouse.officeautomation.controller.tools;
 
 import java.util.List;
 
@@ -17,14 +17,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
-import com.ssthouse.officeautomation.controller.bean.QuestionnaireResultBean;
-import com.ssthouse.officeautomation.controller.bean.QuestionnaireResultBean.Data;
-import com.ssthouse.officeautomation.controller.cons.ControllerCons;
-import com.ssthouse.officeautomation.controller.util.ResultHelper;
+import com.ssthouse.officeautomation.controller.tools.bean.QuestionnaireAnswerBean;
+import com.ssthouse.officeautomation.controller.tools.bean.QuestionnaireResultBean;
+import com.ssthouse.officeautomation.controller.tools.bean.QuestionnaireResultBean.Data;
 import com.ssthouse.officeautomation.domain.QuestionnaireEntity;
+import com.ssthouse.officeautomation.service.IAnswerService;
 import com.ssthouse.officeautomation.service.IQuestionnaireService;
 import com.ssthouse.officeautomation.token.TokenManager;
 import com.ssthouse.officeautomation.util.Log;
+import com.ssthouse.officeautomation.util.ResultHelper;
+import com.ssthouse.officeautomation.util.constant.ControllerCons;import com.sun.org.apache.bcel.internal.generic.NEW;
 
 @Controller
 @RequestMapping("/questionnaire")
@@ -61,6 +63,23 @@ public class QuestionanireController {
 		QuestionnaireResultBean resultBean = new QuestionnaireResultBean(true, "获取问卷数据成功",
 				new Data(openList, ownedList));
 		return new Gson().toJson(resultBean);
+	}
+	
+	@CrossOrigin
+	@PostMapping(value = "/answer", produces={ControllerCons.PRODUCES_UTF_8})
+	@ResponseBody
+	public String postQuestionnaireAnswer(@RequestBody QuestionnaireAnswerBean questionnaireAnswerBean,
+			HttpServletRequest request){
+		if (!TokenManager.verifyToken(request)) {
+			return ResultHelper.generateTokenInvalidResult();
+		}
+		//进行问卷结果保存
+		ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
+		IAnswerService service = context.getBean(IAnswerService.class);
+		String username = TokenManager.getTokenUsername(request.getHeader("token"));
+		service.saveAnswer(questionnaireAnswerBean, username);
+		Log.error(new Gson().toJson(questionnaireAnswerBean));
+		return ResultHelper.generateSimpleResult(true, "问卷提交成功: 后台消息");
 	}
 	
 	@ExceptionHandler  

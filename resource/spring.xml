@@ -18,17 +18,18 @@
 	<!-- 定义 SessionFactory -->
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
-		
+
 		<property name="dataSource" ref="dataSource"></property>
 
 		<!-- 指定hibernate的配置文件位置 -->
 		<property name="configLocation" value="classpath:hibernate.cfg.xml"></property>
-		
+
 		<!-- 指定映射文件 -->
 		<property name="annotatedClasses">
 			<list>
 				<value>com.ssthouse.officeautomation.domain.UserEntity</value>
-				<value>com.ssthouse.officeautomation.domain.QuestionnaireEntity</value>
+				<value>com.ssthouse.officeautomation.domain.QuestionnaireEntity
+				</value>
 				<value>com.ssthouse.officeautomation.domain.QuestionEntity</value>
 			</list>
 		</property>
@@ -51,6 +52,10 @@
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
 
+	<bean id="answerDao" class="com.ssthouse.officeautomation.dao.impl.AnswerDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
 	<!-- Service Beans -->
 	<bean id="userInfoService"
 		class="com.ssthouse.officeautomation.service.impl.UserInfoServiceImpl">
@@ -60,6 +65,11 @@
 	<bean id="questionnaireSerice"
 		class="com.ssthouse.officeautomation.service.impl.QuestionnaireServiceImpl">
 		<property name="dao" ref="questionnaireDao"></property>
+	</bean>
+
+	<bean id="answerService"
+		class="com.ssthouse.officeautomation.service.impl.AnswerServiceImpl">
+		<property name="dao" ref="answerDao"></property>
 	</bean>
 
 	<!-- 暂时不知道是做什么用的... -->

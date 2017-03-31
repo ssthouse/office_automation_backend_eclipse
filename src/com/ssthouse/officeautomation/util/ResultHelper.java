@@ -1,4 +1,4 @@
-package com.ssthouse.officeautomation.controller.util;
+package com.ssthouse.officeautomation.util;
 
 import com.google.gson.Gson;
 import com.ssthouse.officeautomation.controller.bean.SimpleResultBean;
