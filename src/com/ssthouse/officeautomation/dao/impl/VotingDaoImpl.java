@@ -2,9 +2,11 @@ package com.ssthouse.officeautomation.dao.impl;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
+import com.google.gson.Gson;
 import com.ssthouse.officeautomation.base.BaseDao;
 import com.ssthouse.officeautomation.dao.IVotingDao;
 import com.ssthouse.officeautomation.domain.VoteOptionEntity;
@@ -28,7 +30,8 @@ public class VotingDaoImpl extends BaseDao implements IVotingDao {
 	public List<VotingEntity> getVotingEntityList(String username) {
 		Session session = openSession();
 		session.beginTransaction();
-		List<VotingEntity> result = session.createCriteria(VotingEntity.class).list();
+		List<VotingEntity> result = session.createCriteria(VotingEntity.class)
+				.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
 		session.getTransaction().commit();
 		session.close();
 		return result;
@@ -39,7 +42,8 @@ public class VotingDaoImpl extends BaseDao implements IVotingDao {
 		Session session = openSession();
 		session.beginTransaction();
 		List<VotingEntity> result = session.createCriteria(VotingEntity.class)
-				.add(Restrictions.eq(VotingEntity.PROPERTY_CREATER_ID, createrId)).list();
+				.add(Restrictions.eq(VotingEntity.PROPERTY_CREATER_ID, createrId))
+				.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
 		session.getTransaction().commit();
 		session.close();
 		return result;
@@ -51,7 +55,6 @@ public class VotingDaoImpl extends BaseDao implements IVotingDao {
 		session.beginTransaction();
 		session.save(votingEntity);
 		// set the generated voting_id to vote option beans
-		Log.error(votingEntity.getVotingId() + "   is the voting id");
 		for (VoteOptionEntity voteOption : votingEntity.getVoteOptions()) {
 			voteOption.setVotingId(votingEntity.getVotingId());
 		}

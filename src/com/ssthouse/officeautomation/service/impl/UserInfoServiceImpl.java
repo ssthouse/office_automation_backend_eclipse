@@ -1,14 +1,10 @@
 package com.ssthouse.officeautomation.service.impl;
 
-import org.springframework.transaction.annotation.Transactional;
-
 import com.ssthouse.officeautomation.base.BaseService;
 import com.ssthouse.officeautomation.dao.IUserDao;
 import com.ssthouse.officeautomation.domain.UserEntity;
 import com.ssthouse.officeautomation.service.IUserInfoService;
 import com.ssthouse.officeautomation.token.TokenManager;
-import com.ssthouse.officeautomation.util.BeanValidator;
-import com.ssthouse.officeautomation.util.Log;
 import com.ssthouse.officeautomation.util.StringUtil;
 
 public class UserInfoServiceImpl extends BaseService<IUserDao> implements IUserInfoService {

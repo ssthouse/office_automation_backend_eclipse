@@ -27,10 +27,10 @@ public class VoteOptionEntity {
 	private int sum;
 	
 	public VoteOptionEntity() {
-		this.id = 1;
-		this.votingId = 1;
+		this.id = 0;
+		this.votingId = 0;
 		this.title = "";
-		this.sum = 1;
+		this.sum = 0;
 	}
 
 	@Expose
