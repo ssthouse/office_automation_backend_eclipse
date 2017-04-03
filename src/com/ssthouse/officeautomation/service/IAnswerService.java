@@ -1,7 +1,9 @@
 package com.ssthouse.officeautomation.service;
 
-import com.ssthouse.officeautomation.controller.tools.bean.AnswerAnalysisBean;
+import java.util.List;
+
 import com.ssthouse.officeautomation.controller.tools.bean.QuestionnaireAnswerBean;
+import com.ssthouse.officeautomation.domain.QuestionnaireAnswerEntity;
 
 public interface IAnswerService {
 
@@ -18,5 +20,5 @@ public interface IAnswerService {
 	 * @param questionnaireId
 	 * @return
 	 */
-	AnswerAnalysisBean getAnswerAnalysis(int questionnaireId);
+	List<QuestionnaireAnswerEntity> getAnswerList(int questionnaireId);
 }

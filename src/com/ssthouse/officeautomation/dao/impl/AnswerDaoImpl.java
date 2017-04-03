@@ -7,12 +7,12 @@ import org.hibernate.criterion.Restrictions;
 
 import com.ssthouse.officeautomation.base.BaseDao;
 import com.ssthouse.officeautomation.dao.IAnswerDao;
-import com.ssthouse.officeautomation.domain.AnswerEntity;
+import com.ssthouse.officeautomation.domain.QuestionnaireAnswerEntity;
 
 public class AnswerDaoImpl extends BaseDao implements IAnswerDao {
 
 	@Override
-	public void saveAnswer(AnswerEntity answerEntity) {
+	public void saveAnswer(QuestionnaireAnswerEntity answerEntity) {
 		Session session = openSession();
 		session.beginTransaction();
 		session.save(answerEntity);
@@ -21,10 +21,10 @@ public class AnswerDaoImpl extends BaseDao implements IAnswerDao {
 	}
 
 	@Override
-	public List<AnswerEntity> getAnswerList(int questionnaireId) {
+	public List<QuestionnaireAnswerEntity> getAnswerList(int questionnaireId) {
 		Session session = openSession();
 		session.beginTransaction();
-		List<AnswerEntity> result = session.createCriteria(AnswerEntity.class)
+		List<QuestionnaireAnswerEntity> result = session.createCriteria(QuestionnaireAnswerEntity.class)
 				.add(Restrictions.eq("questionnaireId", questionnaireId)).list();
 		return result;
 	}

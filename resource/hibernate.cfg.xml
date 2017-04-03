@@ -17,7 +17,7 @@
         <mapping class="com.ssthouse.officeautomation.domain.UserEntity"/> 
         <mapping class="com.ssthouse.officeautomation.domain.QuestionEntity"/> 
         <mapping class="com.ssthouse.officeautomation.domain.QuestionnaireEntity"/> 
-        <mapping class="com.ssthouse.officeautomation.domain.AnswerEntity"/>
+        <mapping class="com.ssthouse.officeautomation.domain.QuestionnaireAnswerEntity"/>
         <!-- DB schema will be updated if needed -->
         <!-- <property name="hbm2ddl.auto">update</property> -->
     </session-factory>

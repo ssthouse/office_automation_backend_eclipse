@@ -7,7 +7,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "answer", schema = "office_automation", catalog = "")
-public class AnswerEntity {
+public class QuestionnaireAnswerEntity {
 	
     private int id;
     private int questionnaireId;
@@ -46,7 +46,7 @@ public class AnswerEntity {
     }
 
     @Basic
-    @Column(name = "answer", nullable = false, length = 255)
+    @Column(name = "answer", nullable = false, length = 1000)
     public String getAnswer() {
         return answer;
     }
@@ -60,7 +60,7 @@ public class AnswerEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        AnswerEntity that = (AnswerEntity) o;
+        QuestionnaireAnswerEntity that = (QuestionnaireAnswerEntity) o;
 
         if (id != that.id) return false;
         if (questionnaireId != that.questionnaireId) return false;

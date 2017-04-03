@@ -50,7 +50,7 @@ public class SingleAnswerBean {
 		return selections;
 	}
 
-	public void setSelection(List<String> selections) {
+	public void setSelections(List<String> selections) {
 		this.selections = selections;
 	}
 

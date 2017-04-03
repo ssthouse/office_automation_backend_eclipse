@@ -2,11 +2,11 @@ package com.ssthouse.officeautomation.dao;
 
 import java.util.List;
 
-import com.ssthouse.officeautomation.domain.AnswerEntity;
+import com.ssthouse.officeautomation.domain.QuestionnaireAnswerEntity;
 
 public interface IAnswerDao {
 	
-	void saveAnswer(AnswerEntity answerEntity);
+	void saveAnswer(QuestionnaireAnswerEntity answerEntity);
 
-	List<AnswerEntity> getAnswerList(int questionnaireId);
+	List<QuestionnaireAnswerEntity> getAnswerList(int questionnaireId);
 }
