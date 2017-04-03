@@ -76,6 +76,11 @@
 		<property name="dao" ref="answerDao"></property>
 	</bean>
 
+	<bean id="votingService"
+		class="com.ssthouse.officeautomation.service.impl.VotingServiceImpl">
+		<property name="dao" ref="votingDao"></property>
+	</bean>
+
 	<!-- 暂时不知道是做什么用的... -->
 	<bean id="txManager"
 		class="org.springframework.orm.hibernate5.HibernateTransactionManager">

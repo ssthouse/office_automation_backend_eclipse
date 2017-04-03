@@ -14,6 +14,17 @@ import com.ssthouse.officeautomation.util.Log;
 public class VotingDaoImpl extends BaseDao implements IVotingDao {
 
 	@Override
+	public VotingEntity getVotingEntity(int votingId) {
+		Session session = openSession();
+		session.beginTransaction();
+		VotingEntity votingEntity = (VotingEntity) session.createCriteria(VotingEntity.class)
+				.add(Restrictions.eq(VotingEntity.PROPERTY_VOTING_ID, votingId)).uniqueResult();
+		session.getTransaction().commit();
+		session.close();
+		return votingEntity;
+	}
+
+	@Override
 	public List<VotingEntity> getVotingEntityList(String username) {
 		Session session = openSession();
 		session.beginTransaction();
@@ -40,7 +51,7 @@ public class VotingDaoImpl extends BaseDao implements IVotingDao {
 		session.beginTransaction();
 		session.save(votingEntity);
 		// set the generated voting_id to vote option beans
-		Log.error(votingEntity.getVotingId()+"   is the voting id");
+		Log.error(votingEntity.getVotingId() + "   is the voting id");
 		for (VoteOptionEntity voteOption : votingEntity.getVoteOptions()) {
 			voteOption.setVotingId(votingEntity.getVotingId());
 		}

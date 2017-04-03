@@ -7,6 +7,14 @@ import com.ssthouse.officeautomation.domain.VotingEntity;
 public interface IVotingDao {
 
 	/**
+	 * 获取指定voting
+	 * 
+	 * @param votingId
+	 * @return
+	 */
+	VotingEntity getVotingEntity(int votingId);
+
+	/**
 	 * 获取可以填写的投票
 	 * 
 	 * @param username

@@ -24,6 +24,7 @@ import com.ssthouse.officeautomation.util.StringUtil;
 @Table(name = "voting", schema = "office_automation", catalog = "")
 public class VotingEntity {
 	public static final String PROPERTY_CREATER_ID = "createrId";
+	public static final String PROPERTY_VOTING_ID = "votingId";
 
 	private int votingId;
 	private String createrId;
