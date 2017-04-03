@@ -3,9 +3,9 @@ package com.ssthouse.officeautomation.controller.tools.bean;
 import java.util.List;
 
 public class QuestionnaireAnswerBean {
-	
+
 	private int questionnaireId;
-	
+
 	private List<SingleAnswerBean> answers;
 
 	public int getQuestionnaireId() {
@@ -23,5 +23,5 @@ public class QuestionnaireAnswerBean {
 	public void setAnswers(List<SingleAnswerBean> answers) {
 		this.answers = answers;
 	}
-	
+
 }

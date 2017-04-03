@@ -56,6 +56,10 @@
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
 
+	<bean id="votingDao" class="com.ssthouse.officeautomation.dao.impl.VotingDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
 	<!-- Service Beans -->
 	<bean id="userInfoService"
 		class="com.ssthouse.officeautomation.service.impl.UserInfoServiceImpl">
