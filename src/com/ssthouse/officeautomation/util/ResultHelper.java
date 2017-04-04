@@ -2,7 +2,6 @@ package com.ssthouse.officeautomation.util;
 
 import com.google.gson.Gson;
 import com.ssthouse.officeautomation.controller.bean.SimpleResultBean;
-import com.sun.org.apache.bcel.internal.generic.NEW;
 
 public class ResultHelper {
 

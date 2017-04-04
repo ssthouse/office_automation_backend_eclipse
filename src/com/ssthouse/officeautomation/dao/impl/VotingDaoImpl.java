@@ -6,7 +6,6 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
-import com.google.gson.Gson;
 import com.ssthouse.officeautomation.base.BaseDao;
 import com.ssthouse.officeautomation.dao.IVotingDao;
 import com.ssthouse.officeautomation.domain.VoteOptionEntity;
@@ -98,7 +97,7 @@ public class VotingDaoImpl extends BaseDao implements IVotingDao {
 		}
 		List<VoteOptionEntity> voteOptionEntities = session.createCriteria(VoteOptionEntity.class)
 				.add(Restrictions.in("id", voteOptionIds)).list();
-		for(VoteOptionEntity voteOptionEntity : voteOptionEntities){
+		for (VoteOptionEntity voteOptionEntity : voteOptionEntities) {
 			voteOptionEntity.setSum(voteOptionEntity.getSum() + 1);
 			session.update(voteOptionEntity);
 		}

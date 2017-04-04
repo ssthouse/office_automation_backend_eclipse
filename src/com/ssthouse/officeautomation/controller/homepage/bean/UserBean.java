@@ -1,19 +1,17 @@
 package com.ssthouse.officeautomation.controller.homepage.bean;
 
-import com.ssthouse.officeautomation.domain.UserEntity;
-
 public class UserBean {
-	
+
 	private String username;
-	
+
 	private String password;
-	
+
 	private boolean isAdmin;
 
-	public UserBean(){
-		
+	public UserBean() {
+
 	}
-	
+
 	public UserBean(String username, String password, boolean isAdmin) {
 		super();
 		this.username = username;
