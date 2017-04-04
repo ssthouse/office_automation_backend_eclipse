@@ -2,6 +2,7 @@ package com.ssthouse.officeautomation.dao;
 
 import java.util.List;
 
+import com.ssthouse.officeautomation.domain.VoteOptionEntity;
 import com.ssthouse.officeautomation.domain.VotingEntity;
 
 public interface IVotingDao {
@@ -43,4 +44,10 @@ public interface IVotingDao {
 	 * @param votingEntity
 	 */
 	void updateVotingEntity(VotingEntity votingEntity);
+	
+	/**
+	 * 保存新增投票
+	 * @param voteOptionList
+	 */
+	void saveVoteOptionList(List<VoteOptionEntity> voteOptionList);
 }

@@ -16,10 +16,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 import com.ssthouse.officeautomation.controller.tools.bean.OpenVotingListResult;
 import com.ssthouse.officeautomation.controller.tools.bean.OwnedVotingListResult;
+import com.ssthouse.officeautomation.domain.VoteOptionEntity;
 import com.ssthouse.officeautomation.domain.VotingEntity;
 import com.ssthouse.officeautomation.service.IVotingService;
 import com.ssthouse.officeautomation.service.impl.VotingServiceImpl;
 import com.ssthouse.officeautomation.token.TokenManager;
+import com.ssthouse.officeautomation.util.Log;
 import com.ssthouse.officeautomation.util.ResultHelper;
 import com.ssthouse.officeautomation.util.constant.ControllerCons;
 
@@ -40,9 +42,23 @@ public class VotingController {
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
 		IVotingService votingService = context.getBean(VotingServiceImpl.class);
 		votingService.saveVoting(votingEntity);
-		return ResultHelper.generateSimpleResult(true, "问卷保存成功");
+		return ResultHelper.generateSimpleResult(true, "投票保存成功");
 	}
 
+	@CrossOrigin
+	@ResponseBody
+	@PostMapping(value = "/vote", produces = ControllerCons.PRODUCES_UTF_8)
+	public String saveVoteOptionList(HttpServletRequest request, @RequestBody List<VoteOptionEntity> voteOptionList) {
+		if (!TokenManager.verifyToken(request)) {
+			return ResultHelper.generateTokenInvalidResult();
+		}
+		Log.error(new Gson().toJson(voteOptionList));
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
+		IVotingService votingService = context.getBean(VotingServiceImpl.class);
+		votingService.saveVoteOptionList(voteOptionList);
+		return ResultHelper.generateSimpleResult(true, "问卷保存成功");
+	}
+	
 	@CrossOrigin
 	@ResponseBody
 	@GetMapping(value = "/open", produces = ControllerCons.PRODUCES_UTF_8)

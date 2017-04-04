@@ -86,4 +86,24 @@ public class VotingDaoImpl extends BaseDao implements IVotingDao {
 		session.close();
 	}
 
+	@Override
+	public void saveVoteOptionList(List<VoteOptionEntity> voteOptionList) {
+		Session session = openSession();
+		session.beginTransaction();
+		// 根据id获取VoteOption
+		Integer[] voteOptionIds = new Integer[voteOptionList.size()];
+		for (int i = 0; i < voteOptionList.size(); i++) {
+			voteOptionIds[i] = voteOptionList.get(i).getId();
+			Log.error("this is the id" + voteOptionIds[i]);
+		}
+		List<VoteOptionEntity> voteOptionEntities = session.createCriteria(VoteOptionEntity.class)
+				.add(Restrictions.in("id", voteOptionIds)).list();
+		for(VoteOptionEntity voteOptionEntity : voteOptionEntities){
+			voteOptionEntity.setSum(voteOptionEntity.getSum() + 1);
+			session.update(voteOptionEntity);
+		}
+		session.getTransaction().commit();
+		session.close();
+	}
+
 }

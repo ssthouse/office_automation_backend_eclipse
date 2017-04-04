@@ -2,6 +2,7 @@ package com.ssthouse.officeautomation.service;
 
 import java.util.List;
 
+import com.ssthouse.officeautomation.domain.VoteOptionEntity;
 import com.ssthouse.officeautomation.domain.VotingEntity;
 
 public interface IVotingService {
@@ -36,4 +37,10 @@ public interface IVotingService {
 	 * @return
 	 */
 	List<VotingEntity> getOwnedVotingList(String createrId);
+	
+	/**
+	 * 保存新提交的投票
+	 * @param voteOptionList
+	 */
+	void saveVoteOptionList(List<VoteOptionEntity> voteOptionList);
 }
