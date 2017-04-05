@@ -1,31 +1,23 @@
 package com.ssthouse.officeautomation.controller.homepage;
 
-import com.google.gson.Gson;
-import com.ssthouse.officeautomation.controller.bean.SimpleResultBean;
-import com.ssthouse.officeautomation.controller.homepage.bean.UserBean;
-import com.ssthouse.officeautomation.controller.homepage.bean.UserResultBean;
-import com.ssthouse.officeautomation.dao.impl.UserDaoImpl;
-import com.ssthouse.officeautomation.domain.UserEntity;
-import com.ssthouse.officeautomation.service.IUserInfoService;
-import com.ssthouse.officeautomation.token.TokenManager;
-import com.ssthouse.officeautomation.util.BeanValidator;
-import com.ssthouse.officeautomation.util.Log;
-import com.ssthouse.officeautomation.util.StringUtil;
-import com.ssthouse.officeautomation.util.constant.ControllerCons;
-import com.sun.org.apache.bcel.internal.generic.NEW;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.google.gson.Gson;
+import com.ssthouse.officeautomation.controller.bean.SimpleResultBean;
+import com.ssthouse.officeautomation.controller.homepage.bean.UserResultBean;
+import com.ssthouse.officeautomation.domain.UserEntity;
+import com.ssthouse.officeautomation.service.IUserInfoService;
+import com.ssthouse.officeautomation.token.TokenManager;
+import com.ssthouse.officeautomation.util.constant.ControllerCons;
 
 /**
  * Created by ssthouse on 26/01/2017.
