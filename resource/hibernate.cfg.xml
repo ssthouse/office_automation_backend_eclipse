@@ -20,6 +20,7 @@
 			class="com.ssthouse.officeautomation.domain.QuestionnaireAnswerEntity" />
 		<mapping class="com.ssthouse.officeautomation.domain.VoteOptionEntity" />
 		<mapping class="com.ssthouse.officeautomation.domain.VotingEntity" />
+		<mapping class="com.ssthouse.officeautomation.domain.AskLeaveEntity" />
 		<!-- DB schema will be updated if needed -->
 		<!-- <property name="hbm2ddl.auto">update</property> -->
 	</session-factory>

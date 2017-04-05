@@ -60,6 +60,10 @@
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
 
+	<bean id="askLeaveDao" class="com.ssthouse.officeautomation.dao.impl.AskLeaveDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
 	<!-- Service Beans -->
 	<bean id="userInfoService"
 		class="com.ssthouse.officeautomation.service.impl.UserInfoServiceImpl">
@@ -79,6 +83,11 @@
 	<bean id="votingService"
 		class="com.ssthouse.officeautomation.service.impl.VotingServiceImpl">
 		<property name="dao" ref="votingDao"></property>
+	</bean>
+
+	<bean id="askLeaveService"
+		class="com.ssthouse.officeautomation.service.impl.AskLeaveServiceImpl">
+		<property name="dao" ref="askLeaveDao"></property>
 	</bean>
 
 	<!-- 暂时不知道是做什么用的... -->
