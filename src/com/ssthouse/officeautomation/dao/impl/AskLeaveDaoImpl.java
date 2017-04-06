@@ -81,4 +81,10 @@ public class AskLeaveDaoImpl extends BaseDao implements IAskLeaveDao {
 		return result;
 	}
 
+	@Override
+	public void deleteAskLeaveEntity(int askLeaveEntityId) {
+		AskLeaveEntity askLeaveEntity = getAskLeaveEntity(askLeaveEntityId);
+		deleteAskLeaveEntity(askLeaveEntity);
+	}
+
 }

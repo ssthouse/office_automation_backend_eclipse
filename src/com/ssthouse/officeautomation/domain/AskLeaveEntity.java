@@ -1,8 +1,12 @@
 package com.ssthouse.officeautomation.domain;
 
-import javax.persistence.*;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
-import com.google.gson.annotations.Expose;
 import com.ssthouse.officeautomation.util.StringUtil;
 
 /**
@@ -20,6 +24,10 @@ public class AskLeaveEntity {
 	private String username;
 	private String approverUsername;
 	private String state;
+
+	public static String LEAVE_STATE_DRAFT = "draft";
+	public static String LEAVE_STATE_UNAPPROVED = "unapproved";
+	public static String LEAVE_STATE_APPROVED = "approved";
 
 	@Id
 	@Column(name = "id", nullable = false)
@@ -158,6 +166,18 @@ public class AskLeaveEntity {
 		if (StringUtil.isEmpty(leaveType, beginDate, endDate, description, username, approverUsername, state)) {
 			return false;
 		}
+		if (!this.isValidState()) {
+			return false;
+		}
 		return true;
+	}
+
+	@Transient
+	public boolean isValidState() {
+		if (this.state.equals(LEAVE_STATE_DRAFT) || this.state.equals(LEAVE_STATE_UNAPPROVED)
+				|| this.state.equals(LEAVE_STATE_APPROVED)) {
+			return true;
+		}
+		return false;
 	}
 }

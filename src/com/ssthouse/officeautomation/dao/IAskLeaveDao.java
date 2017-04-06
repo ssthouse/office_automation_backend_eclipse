@@ -12,6 +12,8 @@ public interface IAskLeaveDao {
 	
 	void deleteAskLeaveEntity(AskLeaveEntity askLeaveEntity);
 	
+	void deleteAskLeaveEntity(int askLeaveEntityId);
+	
 	AskLeaveEntity getAskLeaveEntity(int id);
 	
 	List<AskLeaveEntity> getUserAskLeaveEntities(String username);
