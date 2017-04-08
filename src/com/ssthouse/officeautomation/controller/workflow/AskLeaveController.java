@@ -67,7 +67,7 @@ public class AskLeaveController {
 	}
 
 	@CrossOrigin
-	@GetMapping(value = "/user", produces = ControllerCons.PRODUCES_UTF_8)
+	@GetMapping(value = "/open", produces = ControllerCons.PRODUCES_UTF_8)
 	@ResponseBody
 	String getUserAskLeaveEntities(HttpServletRequest request) {
 		if (!TokenManager.verifyToken(request)) {
@@ -94,10 +94,11 @@ public class AskLeaveController {
 		String approverUername = TokenManager.getTokenUsername(request.getHeader("token"));
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
 		AskLeaveServiceImpl service = context.getBean(AskLeaveServiceImpl.class);
-		List<AskLeaveEntity> result = service.getAdminAskLeaveEntities(approverUername);
-		if (result == null) {
+		List<AskLeaveEntity> askLeaveList = service.getAdminAskLeaveEntities(approverUername);
+		if (askLeaveList == null) {
 			return ResultHelper.generateSimpleResult(false, "请假审批数据获取失败");
 		}
+		AskLeaveEntitiesResult result = new AskLeaveEntitiesResult(true, "获取审批数据成功", askLeaveList);
 		return new Gson().toJson(result);
 	}
 }

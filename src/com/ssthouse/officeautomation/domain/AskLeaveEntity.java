@@ -28,6 +28,7 @@ public class AskLeaveEntity {
 	public static String LEAVE_STATE_DRAFT = "draft";
 	public static String LEAVE_STATE_UNAPPROVED = "unapproved";
 	public static String LEAVE_STATE_APPROVED = "approved";
+	public static String LEAVE_STATE_DECLINE = "decline";
 
 	@Id
 	@Column(name = "id", nullable = false)
