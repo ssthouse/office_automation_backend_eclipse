@@ -22,6 +22,7 @@
 		<mapping class="com.ssthouse.officeautomation.domain.VotingEntity" />
 		<mapping class="com.ssthouse.officeautomation.domain.AskLeaveEntity" />
 		<mapping class="com.ssthouse.officeautomation.domain.WorkOvertimeEntity" />
+		<mapping class="com.ssthouse.officeautomation.domain.OutingEntity" />
 		<!-- DB schema will be updated if needed -->
 		<!-- <property name="hbm2ddl.auto">update</property> -->
 	</session-factory>
