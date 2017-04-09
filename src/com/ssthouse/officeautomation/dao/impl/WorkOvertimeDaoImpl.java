@@ -50,4 +50,24 @@ public class WorkOvertimeDaoImpl extends BaseDao implements IWorkOvertimeDao {
 		session.close();
 		return result;
 	}
+
+	@Override
+	public void updateWorkOvertime(WorkOvertimeEntity entity) {
+		Session session = openSession();
+		session.beginTransaction();
+		session.update(entity);
+		session.getTransaction().commit();
+		session.close();
+	}
+
+	@Override
+	public void deleteWorkOvertime(int entiyId) {
+		WorkOvertimeEntity entity = getWorkOvertimeEntity(entiyId);
+		Session session = openSession();
+		session.beginTransaction();
+		session.delete(entity);
+		session.getTransaction().commit();
+		session.close();
+	}
+
 }

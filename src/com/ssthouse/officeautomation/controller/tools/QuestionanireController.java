@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
+import com.ssthouse.officeautomation.base.BaseController;
 import com.ssthouse.officeautomation.controller.tools.bean.QuestionnaireAnswerBean;
 import com.ssthouse.officeautomation.controller.tools.bean.QuestionnaireResultBean;
 import com.ssthouse.officeautomation.controller.tools.bean.QuestionnaireResultBean.Data;
@@ -32,7 +33,7 @@ import com.ssthouse.officeautomation.util.constant.ControllerCons;
 
 @Controller
 @RequestMapping("/questionnaire")
-public class QuestionanireController {
+public class QuestionanireController extends BaseController<IQuestionnaireService> {
 
 	@CrossOrigin
 	@PostMapping(value = "/detail", produces = { ControllerCons.PRODUCES_UTF_8 })
@@ -44,10 +45,7 @@ public class QuestionanireController {
 		if (questionnaireEntity == null || !questionnaireEntity.isValid()) {
 			return ResultHelper.generateSimpleResult(false, "请求数据不完整");
 		}
-		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
-		IQuestionnaireService service = (IQuestionnaireService) context.getBean(IQuestionnaireService.class);
-		service.saveOrUpdateQuestionnaire(questionnaireEntity);
-		Log.error(new Gson().toJson(questionnaireEntity));
+		getService().saveOrUpdateQuestionnaire(questionnaireEntity);
 		return ResultHelper.generateSimpleResult(true, "保存成功");
 	}
 
@@ -58,11 +56,8 @@ public class QuestionanireController {
 		if (!TokenManager.verifyToken(request)) {
 			return ResultHelper.generateTokenInvalidResult();
 		}
-		ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
-		IQuestionnaireService questionnaireService = (IQuestionnaireService) context
-				.getBean(IQuestionnaireService.class);
-		List<QuestionnaireEntity> openList = questionnaireService.getOpenQuestionnaireList(request);
-		List<QuestionnaireEntity> ownedList = questionnaireService.getOwnedQuestionnaireList(request);
+		List<QuestionnaireEntity> openList = getService().getOpenQuestionnaireList(request);
+		List<QuestionnaireEntity> ownedList = getService().getOwnedQuestionnaireList(request);
 		QuestionnaireResultBean resultBean = new QuestionnaireResultBean(true, "获取问卷数据成功",
 				new Data(openList, ownedList));
 		return new Gson().toJson(resultBean);
@@ -103,5 +98,10 @@ public class QuestionanireController {
 	@ResponseBody
 	public String handleException(HttpMessageNotReadableException exception) {
 		return ResultHelper.generateSimpleResult(true, "请求数据格式错误");
+	}
+
+	@Override
+	public Class<IQuestionnaireService> getServiceClass() {
+		return IQuestionnaireService.class;
 	}
 }

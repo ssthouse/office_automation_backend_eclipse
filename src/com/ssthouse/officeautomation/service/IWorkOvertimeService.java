@@ -8,6 +8,10 @@ public interface IWorkOvertimeService {
 	
 	void saveNewWorkOvertime(WorkOvertimeEntity entity);
 	
+	void updateWorkOvertime(WorkOvertimeEntity entity);
+	
+	void deleteWorkOvertime(int entityId);
+	
 	WorkOvertimeEntity getWorkOvertime(int entityId);
 	
 	List<WorkOvertimeEntity> getUserWorkOvertimeList(String username);

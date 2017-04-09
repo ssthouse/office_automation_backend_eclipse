@@ -15,6 +15,11 @@ public class WorkOvertimeServiceImpl extends BaseService<IWorkOvertimeDao> imple
 	}
 
 	@Override
+	public void updateWorkOvertime(WorkOvertimeEntity entity) {
+		getDao().updateWorkOvertime(entity);
+	}
+	
+	@Override
 	public WorkOvertimeEntity getWorkOvertime(int entityId) {
 		return getDao().getWorkOvertimeEntity(entityId);
 	}
@@ -27,6 +32,11 @@ public class WorkOvertimeServiceImpl extends BaseService<IWorkOvertimeDao> imple
 	@Override
 	public List<WorkOvertimeEntity> getAdminWorkOvertimeList(String approverUsername) {
 		return getDao().getAdminWorkOvertimeList(approverUsername);
+	}
+
+	@Override
+	public void deleteWorkOvertime(int entityId) {
+		getDao().deleteWorkOvertime(entityId);
 	}
 
 }

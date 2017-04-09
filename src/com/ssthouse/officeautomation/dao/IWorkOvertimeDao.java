@@ -8,6 +8,10 @@ public interface IWorkOvertimeDao{
 
 	void saveWorkOvertime (WorkOvertimeEntity workOvertimeEntity);
 	
+	void updateWorkOvertime(WorkOvertimeEntity entity);
+	
+	void deleteWorkOvertime(int entiyId);
+	
 	WorkOvertimeEntity getWorkOvertimeEntity(int id);
 	
 	List<WorkOvertimeEntity> getUserWorkOvertimeList(String username);
