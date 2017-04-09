@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.ssthouse.officeautomation.domain.base.IWorkflowState;
 import com.ssthouse.officeautomation.util.StringUtil;
 
 /**
@@ -14,7 +15,7 @@ import com.ssthouse.officeautomation.util.StringUtil;
  */
 @Entity
 @Table(name = "workflow_ask_leave", schema = "office_automation", catalog = "")
-public class AskLeaveEntity {
+public class AskLeaveEntity implements IWorkflowState{
 	private int id;
 	private String leaveType;
 	private String beginDate;
@@ -25,10 +26,6 @@ public class AskLeaveEntity {
 	private String approverUsername;
 	private String state;
 
-	public static String LEAVE_STATE_DRAFT = "draft";
-	public static String LEAVE_STATE_UNAPPROVED = "unapproved";
-	public static String LEAVE_STATE_APPROVED = "approved";
-	public static String LEAVE_STATE_DECLINE = "decline";
 
 	@Id
 	@Column(name = "id", nullable = false)
@@ -175,8 +172,8 @@ public class AskLeaveEntity {
 
 	@Transient
 	public boolean isValidState() {
-		if (this.state.equals(LEAVE_STATE_DRAFT) || this.state.equals(LEAVE_STATE_UNAPPROVED)
-				|| this.state.equals(LEAVE_STATE_APPROVED)) {
+		if (this.state.equals(STATE_DRAFT) || this.state.equals(STATE_UNAPPROVED)
+				|| this.state.equals(STATE_APPROVED)) {
 			return true;
 		}
 		return false;

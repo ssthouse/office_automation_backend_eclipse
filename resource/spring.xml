@@ -64,6 +64,11 @@
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
 
+	<bean id="workOvertimeDao"
+		class="com.ssthouse.officeautomation.dao.impl.WorkOvertimeDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
 	<!-- Service Beans -->
 	<bean id="userInfoService"
 		class="com.ssthouse.officeautomation.service.impl.UserInfoServiceImpl">
@@ -88,6 +93,11 @@
 	<bean id="askLeaveService"
 		class="com.ssthouse.officeautomation.service.impl.AskLeaveServiceImpl">
 		<property name="dao" ref="askLeaveDao"></property>
+	</bean>
+
+	<bean id="workOvertimeService"
+		class="com.ssthouse.officeautomation.service.impl.WorkOvertimeServiceImpl">
+		<property name="dao" ref="workOvertimeDao"></property>
 	</bean>
 
 	<!-- 暂时不知道是做什么用的... -->
