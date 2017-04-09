@@ -2,7 +2,6 @@ package com.ssthouse.officeautomation.controller.homepage;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
+import com.ssthouse.officeautomation.base.BaseController;
 import com.ssthouse.officeautomation.controller.bean.SimpleResultBean;
 import com.ssthouse.officeautomation.controller.homepage.bean.UserResultBean;
 import com.ssthouse.officeautomation.domain.UserEntity;
@@ -25,7 +25,7 @@ import com.ssthouse.officeautomation.util.constant.ControllerCons;
 
 @Controller
 @RequestMapping("/user")
-public class UserController {
+public class UserController extends BaseController<IUserInfoService> {
 
 	/**
 	 * 获取用户信息 GET
@@ -41,9 +41,7 @@ public class UserController {
 			return new Gson().toJson(new UserResultBean(false, "token 过期", null));
 		}
 		// 根据token获取UserEntity
-		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
-		IUserInfoService userInfoService = context.getBean(IUserInfoService.class);
-		UserEntity userEntity = userInfoService.getUserInfo(request.getHeader("token"));
+		UserEntity userEntity = getService().getUserInfo(request.getHeader("token"));
 		if (!userEntity.isValid()) {
 			return new Gson().toJson(new UserResultBean(false, "未找到用户", null));
 		}
@@ -58,9 +56,12 @@ public class UserController {
 			return new Gson().toJson(new SimpleResultBean(false, "token无效"));
 		}
 		// 根据username找到UserEntity
-		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
-		IUserInfoService userInfoService = context.getBean(IUserInfoService.class);
-		boolean result = userInfoService.updateUserInfo(userEntity, request.getHeader("token"));
+		boolean result = getService().updateUserInfo(userEntity, request.getHeader("token"));
 		return new Gson().toJson(new SimpleResultBean(result));
+	}
+
+	@Override
+	public Class<IUserInfoService> getServiceClass() {
+		return IUserInfoService.class;
 	}
 }
