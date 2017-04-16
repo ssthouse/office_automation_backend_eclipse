@@ -46,30 +46,35 @@
 	<bean id="userDao" class="com.ssthouse.officeautomation.dao.impl.UserDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
-
 	<bean id="questionnaireDao"
 		class="com.ssthouse.officeautomation.dao.impl.QuestionnaireDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
-
 	<bean id="answerDao" class="com.ssthouse.officeautomation.dao.impl.AnswerDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
-
 	<bean id="votingDao" class="com.ssthouse.officeautomation.dao.impl.VotingDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
-
 	<bean id="askLeaveDao" class="com.ssthouse.officeautomation.dao.impl.AskLeaveDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
-
 	<bean id="workOvertimeDao"
 		class="com.ssthouse.officeautomation.dao.impl.WorkOvertimeDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
-
 	<bean id="outingDao" class="com.ssthouse.officeautomation.dao.impl.OutingDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="userConfigDao"
+		class="com.ssthouse.officeautomation.dao.impl.UserConfigDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="meetingDao" class="com.ssthouse.officeautomation.dao.impl.MeetingDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="meetingRoomDao"
+		class="com.ssthouse.officeautomation.dao.impl.MeetingRoomDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
 
@@ -78,35 +83,37 @@
 		class="com.ssthouse.officeautomation.service.impl.UserInfoServiceImpl">
 		<property name="dao" ref="userDao"></property>
 	</bean>
-
 	<bean id="questionnaireSerice"
 		class="com.ssthouse.officeautomation.service.impl.QuestionnaireServiceImpl">
 		<property name="dao" ref="questionnaireDao"></property>
 	</bean>
-
 	<bean id="answerService"
 		class="com.ssthouse.officeautomation.service.impl.AnswerServiceImpl">
 		<property name="dao" ref="answerDao"></property>
 	</bean>
-
 	<bean id="votingService"
 		class="com.ssthouse.officeautomation.service.impl.VotingServiceImpl">
 		<property name="dao" ref="votingDao"></property>
 	</bean>
-
 	<bean id="askLeaveService"
 		class="com.ssthouse.officeautomation.service.impl.AskLeaveServiceImpl">
 		<property name="dao" ref="askLeaveDao"></property>
 	</bean>
-
 	<bean id="workOvertimeService"
 		class="com.ssthouse.officeautomation.service.impl.WorkOvertimeServiceImpl">
 		<property name="dao" ref="workOvertimeDao"></property>
 	</bean>
-
 	<bean id="outingService"
 		class="com.ssthouse.officeautomation.service.impl.OutingServiceImpl">
 		<property name="dao" ref="outingDao"></property>
+	</bean>
+	<bean id="userConfigService"
+		class="com.ssthouse.officeautomation.service.impl.UserConfigServiceImpl">
+		<property name="dao" ref="userConfigDao"></property>
+	</bean>
+	<bean id="meetingService"
+		class="com.ssthouse.officeautomation.service.impl.MeetingServiceImpl">
+		<property name="dao" ref="meetingDao"></property>
 	</bean>
 
 	<!-- 暂时不知道是做什么用的... -->

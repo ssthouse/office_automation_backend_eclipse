@@ -23,6 +23,9 @@
 		<mapping class="com.ssthouse.officeautomation.domain.AskLeaveEntity" />
 		<mapping class="com.ssthouse.officeautomation.domain.WorkOvertimeEntity" />
 		<mapping class="com.ssthouse.officeautomation.domain.OutingEntity" />
+		<mapping class="com.ssthouse.officeautomation.domain.UserConfigEntity" />
+		<mapping class="com.ssthouse.officeautomation.domain.MeetingEntity" />
+		<mapping class="com.ssthouse.officeautomation.domain.MeetingRoomEntity" />
 		<!-- DB schema will be updated if needed -->
 		<!-- <property name="hbm2ddl.auto">update</property> -->
 	</session-factory>
