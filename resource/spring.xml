@@ -77,6 +77,10 @@
 		class="com.ssthouse.officeautomation.dao.impl.MeetingRoomDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
+		<bean id="dispatchDao"
+		class="com.ssthouse.officeautomation.dao.impl.DispatchDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
 
 	<!-- Service Beans -->
 	<bean id="userInfoService"
@@ -114,6 +118,10 @@
 	<bean id="meetingService"
 		class="com.ssthouse.officeautomation.service.impl.MeetingServiceImpl">
 		<property name="dao" ref="meetingDao"></property>
+	</bean>
+		<bean id="meetingRoomService"
+		class="com.ssthouse.officeautomation.service.impl.MeetingRoomServiceImpl">
+		<property name="dao" ref="meetingRoomDao"></property>
 	</bean>
 
 	<!-- 暂时不知道是做什么用的... -->

@@ -34,7 +34,7 @@ public class UserConfigEntity {
     }
 
     @Basic
-    @Column(name = "home_page_config", nullable = true, length = 100)
+    @Column(name = "home_page_config", nullable = true, length = 1000)
     public String getHomePageConfig() {
         return homePageConfig;
     }
@@ -44,7 +44,7 @@ public class UserConfigEntity {
     }
 
     @Basic
-    @Column(name = "tools_page_config", nullable = true, length = 100)
+    @Column(name = "tools_page_config", nullable = true, length = 1000)
     public String getToolsPageConfig() {
         return toolsPageConfig;
     }

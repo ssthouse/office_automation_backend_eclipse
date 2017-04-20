@@ -21,9 +21,9 @@ public class TestMeetingDaoImpl {
 	@Test
 	public void testSaveMeeting() {
 		MeetingEntity entity = new MeetingEntity();
-		entity.setBeginDate("2007-11-11");
-		entity.setBeginTime("10:00");
-		entity.setEndTime("10:20");
+		entity.setBeginDate(System.currentTimeMillis());
+		entity.setBeginTime(System.currentTimeMillis());
+		entity.setEndTime(System.currentTimeMillis());
 		entity.setHoster("ssthouse");
 		entity.setMeetingRoom("东九");
 		entity.setParticipant("ssthouse,cgj,hqq,ytf");
