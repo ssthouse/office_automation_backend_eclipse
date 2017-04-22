@@ -77,10 +77,13 @@
 		class="com.ssthouse.officeautomation.dao.impl.MeetingRoomDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
-		<bean id="dispatchDao"
-		class="com.ssthouse.officeautomation.dao.impl.DispatchDaoImpl">
+	<bean id="dispatchDao" class="com.ssthouse.officeautomation.dao.impl.DispatchDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
+	<bean id="incomingDao" class="com.ssthouse.officeautomation.dao.impl.IncomingDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
 
 	<!-- Service Beans -->
 	<bean id="userInfoService"
@@ -119,9 +122,17 @@
 		class="com.ssthouse.officeautomation.service.impl.MeetingServiceImpl">
 		<property name="dao" ref="meetingDao"></property>
 	</bean>
-		<bean id="meetingRoomService"
+	<bean id="meetingRoomService"
 		class="com.ssthouse.officeautomation.service.impl.MeetingRoomServiceImpl">
 		<property name="dao" ref="meetingRoomDao"></property>
+	</bean>
+	<bean id="dispatchService"
+		class="com.ssthouse.officeautomation.service.impl.DispatchServiceImpl">
+		<property name="dao" ref="dispatchDao"></property>
+	</bean>
+	<bean id="incomingService"
+		class="com.ssthouse.officeautomation.service.impl.IncomingServiceImpl">
+		<property name="dao" ref="incomingDao"></property>
 	</bean>
 
 	<!-- 暂时不知道是做什么用的... -->

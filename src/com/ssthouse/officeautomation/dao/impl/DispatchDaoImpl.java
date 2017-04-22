@@ -71,4 +71,18 @@ public class DispatchDaoImpl extends BaseDao implements IDispatchDao {
 		return result;
 	}
 
+	@Override
+	public void deleteDispatch(int id) {
+		// get the entity 
+		DispatchEntity entity = getDispatch(id);
+		if(entity == null){
+			return;
+		}
+		Session session = openSession();
+		session.beginTransaction();
+		session.delete(entity);
+		session.getTransaction().commit();
+		session.close();
+	}
+
 }

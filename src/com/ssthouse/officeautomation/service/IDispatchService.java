@@ -1,18 +1,16 @@
-package com.ssthouse.officeautomation.dao;
+package com.ssthouse.officeautomation.service;
 
 import java.util.List;
 
 import com.ssthouse.officeautomation.domain.DispatchEntity;
 
-public interface IDispatchDao {
+public interface IDispatchService {
 
 	void saveDispatch(DispatchEntity entity);
 	
 	void deleteDispatch(int id);
 	
 	void updateDispatch(DispatchEntity entity);
-	
-	DispatchEntity getDispatch(int id);
 	
 	List<DispatchEntity> getUserDispatchList(String username);
 	

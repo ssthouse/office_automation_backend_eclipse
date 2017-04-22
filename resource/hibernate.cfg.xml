@@ -27,6 +27,7 @@
 		<mapping class="com.ssthouse.officeautomation.domain.MeetingEntity" />
 		<mapping class="com.ssthouse.officeautomation.domain.MeetingRoomEntity" />
 		<mapping class="com.ssthouse.officeautomation.domain.DispatchEntity"/>
+		<mapping class="com.ssthouse.officeautomation.domain.IncomingEntity"/>
 		<!-- DB schema will be updated if needed -->
 		<!-- <property name="hbm2ddl.auto">update</property> -->
 	</session-factory>
