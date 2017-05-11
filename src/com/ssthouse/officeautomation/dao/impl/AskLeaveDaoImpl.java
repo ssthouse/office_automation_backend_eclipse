@@ -53,7 +53,8 @@ public class AskLeaveDaoImpl extends BaseDao implements IAskLeaveDao {
 		Session session = openSession();
 		session.beginTransaction();
 		AskLeaveEntity result = (AskLeaveEntity) session.createCriteria(AskLeaveEntity.class)
-				.add(Restrictions.eq("id", id)).uniqueResult();
+				.add(Restrictions.eq("id", id))
+				.uniqueResult();
 		session.getTransaction().commit();
 		session.close();
 		return result;
@@ -75,7 +76,9 @@ public class AskLeaveDaoImpl extends BaseDao implements IAskLeaveDao {
 		Session session = openSession();
 		session.beginTransaction();
 		List<AskLeaveEntity> result = session.createCriteria(AskLeaveEntity.class)
-				.add(Restrictions.eq("approverUsername", approverUsername)).list();
+				.add(Restrictions.eq("approverUsername", approverUsername))
+				.add(Restrictions.neOrIsNotNull("state", "draft"))
+				.list();
 		session.getTransaction().commit();
 		session.close();
 		return result;
