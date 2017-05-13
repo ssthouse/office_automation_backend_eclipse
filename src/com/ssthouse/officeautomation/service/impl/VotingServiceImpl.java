@@ -12,7 +12,11 @@ public class VotingServiceImpl extends BaseService<IVotingDao> implements IVotin
 
 	@Override
 	public void saveVoting(VotingEntity votingEntity) {
-		getDao().saveVotingEntity(votingEntity);
+		if (votingEntity.getVotingId() == 0) {
+			getDao().saveVotingEntity(votingEntity);
+		} else {
+			getDao().updateVotingEntity(votingEntity);
+		}
 	}
 
 	@Override
