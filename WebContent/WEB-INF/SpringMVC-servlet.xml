@@ -22,8 +22,6 @@
 
 	<mvc:resources location="/" mapping="/resources/**" />
 	
-	<bean id="exceptionResolver" class="com.ssthouse.officeautomation.base.GlobalHandlerExceptionResolver"></bean>
-
 	<!--配置springMVC拦截器, 多个拦截器,顺序执行 -->
 	<!-- 无法解决 Interceptor加入后的跨域请求问题  暂时弃用 -->
 	<!-- <mvc:interceptors>

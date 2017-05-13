@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.criterion.Restrictions;
+import org.hibernate.criterion.Restrictions;import org.hibernate.procedure.internal.Util.ResultClassesResolutionContext;
 
 import com.google.gson.Gson;
 import com.ssthouse.officeautomation.base.BaseDao;
@@ -49,7 +49,9 @@ public class QuestionnaireDaoImpl extends BaseDao implements IQuestionnaireDao {
 	public List<QuestionnaireEntity> getOpenQuestionnaire(String username) {
 		Session session = openSession();
 		Transaction transaction = session.beginTransaction();
-		List<QuestionnaireEntity> openList = session.createCriteria(QuestionnaireEntity.class).list();
+		List<QuestionnaireEntity> openList = session.createCriteria(QuestionnaireEntity.class)
+				.add(Restrictions.eq("published", true))
+				.list();
 		transaction.commit();
 		return openList;
 	}

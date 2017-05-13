@@ -10,10 +10,4 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @EnableWebMvc
 @ComponentScan(basePackages = { "com.ssthouse.officeautomation" })
 public class SpringConfig extends WebMvcConfigurerAdapter {
-	
-	
-	   @Bean
-	   public GlobalHandlerExceptionResolver globalHandlerExceptionResolver() {
-	      return new GlobalHandlerExceptionResolver();
-	   }
 }

@@ -30,7 +30,9 @@ public class VotingDaoImpl extends BaseDao implements IVotingDao {
 		Session session = openSession();
 		session.beginTransaction();
 		List<VotingEntity> result = session.createCriteria(VotingEntity.class)
-				.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+				.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)
+				.add(Restrictions.eq("published", true))
+				.list();
 		session.getTransaction().commit();
 		session.close();
 		return result;

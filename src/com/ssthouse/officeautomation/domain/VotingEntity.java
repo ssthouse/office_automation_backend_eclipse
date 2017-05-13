@@ -31,6 +31,7 @@ public class VotingEntity {
 	private String title;
 	private String description;
 	private String deadline;
+	private boolean published;
 	
 	private List<VoteOptionEntity> voteOptions = new ArrayList<VoteOptionEntity>();
 
@@ -92,6 +93,16 @@ public class VotingEntity {
 
 	public void setDeadline(String deadline) {
 		this.deadline = deadline;
+	}
+	
+	@Basic
+	@Column(name="published", nullable = false, columnDefinition = "TINYINT(1)")
+	public boolean getPublished(){
+		return published;
+	}
+	
+	public void setPublished(boolean published){
+		this.published = published;
 	}
 
 	@Override
