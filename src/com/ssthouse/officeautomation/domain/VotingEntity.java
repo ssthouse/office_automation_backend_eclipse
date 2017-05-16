@@ -32,6 +32,7 @@ public class VotingEntity {
 	private String description;
 	private String deadline;
 	private boolean published;
+	private boolean multipleChoice;
 	
 	private List<VoteOptionEntity> voteOptions = new ArrayList<VoteOptionEntity>();
 
@@ -93,6 +94,16 @@ public class VotingEntity {
 
 	public void setDeadline(String deadline) {
 		this.deadline = deadline;
+	}
+	
+	@Basic
+	@Column(name="multiple_choice", nullable = false, columnDefinition = "TINYINT(1)")
+	public boolean getMultipleChoice(){
+		return multipleChoice;
+	}
+	
+	public void setMultipleChoice(boolean multipleChoice){
+		this.multipleChoice = multipleChoice;
 	}
 	
 	@Basic

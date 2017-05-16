@@ -83,7 +83,9 @@
 	<bean id="incomingDao" class="com.ssthouse.officeautomation.dao.impl.IncomingDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
-
+	<bean id="newsDao" class="com.ssthouse.officeautomation.dao.impl.NewsDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
 
 	<!-- Service Beans -->
 	<bean id="userInfoService"
@@ -133,6 +135,10 @@
 	<bean id="incomingService"
 		class="com.ssthouse.officeautomation.service.impl.IncomingServiceImpl">
 		<property name="dao" ref="incomingDao"></property>
+	</bean>
+	<bean id="newsService"
+		class="com.ssthouse.officeautomation.service.impl.NewsServiceImpl">
+		<property name="dao" ref="newsDao"></property>
 	</bean>
 
 	<!-- 暂时不知道是做什么用的... -->
