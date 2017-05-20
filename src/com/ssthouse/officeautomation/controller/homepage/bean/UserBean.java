@@ -8,6 +8,7 @@ public class UserBean {
 
 	private boolean isAdmin;
 
+	
 	public UserBean() {
 
 	}
