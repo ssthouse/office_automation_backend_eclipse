@@ -1,5 +1,7 @@
 package com.ssthouse.officeautomation.dao.impl;
 
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
@@ -46,6 +48,16 @@ public class UserDaoImpl extends BaseDao implements IUserDao {
 		session.saveOrUpdate(userEntity);
 		transaction.commit();
 		session.close();
+	}
+
+	@Override
+	public List<UserEntity> getAllUser() {
+		Session session = openSession();
+		session.beginTransaction();
+		List<UserEntity> userList = session.createCriteria(UserEntity.class).list();
+		session.getTransaction().commit();
+		session.close();
+		return userList;
 	}
 
 }
