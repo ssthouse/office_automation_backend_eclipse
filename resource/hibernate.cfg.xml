@@ -27,7 +27,6 @@
 		<mapping class="com.ssthouse.officeautomation.domain.MeetingEntity" />
 		<mapping class="com.ssthouse.officeautomation.domain.MeetingRoomEntity" />
 		<mapping class="com.ssthouse.officeautomation.domain.DispatchEntity" />
-		<mapping class="com.ssthouse.officeautomation.domain.IncomingEntity" />
 		<mapping class="com.ssthouse.officeautomation.domain.NewsEntity" />
 		<mapping class="com.ssthouse.officeautomation.domain.DepartmentEntity" />
 		<!-- DB schema will be updated if needed -->
