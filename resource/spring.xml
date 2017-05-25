@@ -83,7 +83,11 @@
 	<bean id="newsDao" class="com.ssthouse.officeautomation.dao.impl.NewsDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
-	<bean id="departmentDao" class="com.ssthouse.officeautomation.dao.impl.DepartmentDaoImpl">
+	<bean id="departmentDao"
+		class="com.ssthouse.officeautomation.dao.impl.DepartmentDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="todoDao" class="com.ssthouse.officeautomation.dao.impl.TodoDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
 
@@ -139,6 +143,10 @@
 	<bean id="departmentService"
 		class="com.ssthouse.officeautomation.service.impl.DepartmentServiceImpl">
 		<property name="dao" ref="departmentDao"></property>
+	</bean>
+	<bean id="todoService"
+		class="com.ssthouse.officeautomation.service.impl.TodoServiceImpl">
+		<property name="dao" ref="todoDao"></property>
 	</bean>
 
 	<!-- 暂时不知道是做什么用的... -->

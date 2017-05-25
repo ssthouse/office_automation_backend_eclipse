@@ -29,6 +29,7 @@
 		<mapping class="com.ssthouse.officeautomation.domain.DispatchEntity" />
 		<mapping class="com.ssthouse.officeautomation.domain.NewsEntity" />
 		<mapping class="com.ssthouse.officeautomation.domain.DepartmentEntity" />
+		<mapping class="com.ssthouse.officeautomation.domain.TodoEntity" />
 		<!-- DB schema will be updated if needed -->
 		<!-- <property name="hbm2ddl.auto">update</property> -->
 	</session-factory>
