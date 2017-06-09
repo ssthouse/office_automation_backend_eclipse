@@ -1,30 +1,20 @@
-# office_automation
+# office_automation_backend
 
-> A Vue.js project
-> 办公自动化系统前端代码
+> A Java SSH project
+> 办公自动化系统后端代码
 
 ## 开发环境
-* webstorm v2017.1
-* npm前端管理工具, 需要安装node.js
+* eclipse V4.6.2
+* Tomcat
+* MySQL 5.7.14
 
 ## 预备知识
-* javascript基础
-* Vue框架基础, 查阅[官网入门指南](https://cn.vuejs.org/)
+* java基础
+* SSH框架
 
 
-## Build Setup
-
-``` bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-```
-
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+## 运行项目
+* 运行前需要开启MySQL数据库(导入数据库表和数据)
+* 使用eclipse将该项目作为web项目打开, 部署到tomcat服务器
 
 
