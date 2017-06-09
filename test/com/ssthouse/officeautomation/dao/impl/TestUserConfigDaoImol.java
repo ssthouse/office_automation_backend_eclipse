@@ -25,14 +25,12 @@ public class TestUserConfigDaoImol {
 	public void testSetUserConfig() {
 		UserConfigEntity userConfigEntity = new UserConfigEntity();
 		userConfigEntity.setUsername("ssthouse");
-		userConfigEntity.setToolsPageConfig("questionnaire,questionnaireAdmin");
 		userConfigDaoImpl.setUserConfig(userConfigEntity);
 	}
 
 	@Test
 	public void testUpdateUserConfig() {
 		UserConfigEntity entity = userConfigDaoImpl.getUserConfig("hahaha");
-		entity.setToolsPageConfig("voting,votingAdmin");
 		userConfigDaoImpl.updateUserConfig(entity);
 	}
 
